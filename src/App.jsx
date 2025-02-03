@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeProvider } from './context/theme-context'
+import { ThemeProvider } from './components/theme-context'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RootLayout from './layout/RootLayout'
 import Home from './pages/Home'
@@ -9,6 +9,7 @@ import FAQ from './pages/FAQ'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import About from './pages/About'
+import { Toaster } from './components/ui/toaster'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme='dark' storageKey="vite-ui-theme" >
       <RouterProvider router={router} />
+      <Toaster />
     </ThemeProvider>
   )
 }

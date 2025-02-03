@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"
 import {
     Card,
     CardContent,
@@ -7,20 +8,19 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import AuthContex from '../context/auth-context'
+import { AuthContext } from '../context/auth-context'
 import { useContext, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { NavLink } from "react-router-dom"
+
 export function RegisterForm({
     className,
     ...props
 }) {
-    const auth = useContext(AuthContex)
+    const { register, isLoading } = useContext(AuthContext)
 
-    async function handleSubmit() {
-        await auth.register()
-    }
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -36,7 +36,12 @@ export function RegisterForm({
             ...prevState,
             [name]: value
         }));
-    }   
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault()
+        await register(formData, navigate)
+    }
 
     return (
         (<div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -48,7 +53,7 @@ export function RegisterForm({
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="grid gap-6">
                             <div className="flex flex-col gap-4">
                                 <Button variant="outline" className="w-full">
@@ -86,7 +91,7 @@ export function RegisterForm({
                                     <Input id="password" onChange={handleChange} name="password" type="password" required />
                                 </div>
                                 <Button type="submit" className="w-full">
-                                    Create An Account
+                                    {isLoading ? 'Please Wait...' : 'Create An Account'}
                                 </Button>
                             </div>
                             <div className="text-center text-sm">
