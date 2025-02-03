@@ -12,6 +12,7 @@ import About from './pages/About'
 import { Toaster } from './components/ui/toaster'
 import Profile from './pages/Profile'
 import ProtectedRoutes from './layout/ProtectedRoutes'
+import Cart from './pages/Cart'
 
 const router = createBrowserRouter([
   {
