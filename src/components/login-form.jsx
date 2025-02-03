@@ -17,13 +17,13 @@ export function LoginForm({
   ...props
 }) {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext)
-  const [email, setEmail] = useState('')
+  const { login, isLoading } = useContext(AuthContext)
+  const [username, setuserName] = useState('')
   const [password, setPassword] = useState('')
 
   async function handleLogin(e) {
     e.preventDefault();
-    await login({ username: email, password }, navigate)
+    await login({ username, password }, navigate)
   }
 
   return (
@@ -57,10 +57,10 @@ export function LoginForm({
               </div>
               <div className="grid gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="username">Username</Label>
                   <Input id="email" onChange={(e) => {
-                    setEmail(e.target.value)
-                  }} type="email" placeholder="example@example.com" required />
+                    setuserName(e.target.value)
+                  }} type="text" placeholder="example" required />
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
@@ -73,8 +73,8 @@ export function LoginForm({
                     setPassword(e.target.value)
                   }} type="password" required />
                 </div>
-                <Button type="submit" className="w-full">
-                  Login
+                <Button disabled={isLoading} type="submit" className="w-full">
+                  {isLoading ? 'Loging in...' : 'Login'}
                 </Button>
               </div>
               <div className="text-center text-sm">

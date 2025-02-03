@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
 import { ModeToggle } from './mode-toggle'
+import { AuthContext } from '@/context/auth-context'
 
 const navItems = [
     { id: "01", path: '/', title: "Home" },
@@ -10,8 +11,9 @@ const navItems = [
     { id: "04", path: '/contact', title: "Contact" },
     { id: "05", path: '/faq', title: "FAQ" },
 ]
-
 function Header() {
+    const { token, logout } = useContext(AuthContext);
+
     return (
         <div className='flex items-center justify-between py-4 px-20 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-white dark:bg-black'>
             <Link to={navItems[0].path} className='text-3xl'>React Store</Link>
@@ -22,7 +24,13 @@ function Header() {
                     )}
                 </ul>
                 <div className="auth-section flex items-center gap-4">
-                    <Button variant="secondary"><Link to="/auth/login">Login</Link></Button>
+                    {token ? (
+                        <Button variant="secondary" onClick={logout}>Logout</Button>
+                    ) : (
+                        <Button variant="secondary">
+                            <Link to="/auth/login">Login</Link>
+                        </Button>
+                    )}
                     <ModeToggle />
                 </div>
             </nav>

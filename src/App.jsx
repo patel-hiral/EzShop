@@ -10,17 +10,26 @@ import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import About from './pages/About'
 import { Toaster } from './components/ui/toaster'
+import Profile from './pages/Profile'
+import ProtectedRoutes from './layout/ProtectedRoutes'
 
 const router = createBrowserRouter([
   {
     path: '/', element: <RootLayout />, children: [
       { path: '', index: true, element: <Home /> },
-      { path: '/about', index: true, element: <About /> },
-      { path: '/products', index: true, element: <Products /> },
-      { path: '/contact', index: true, element: <Contact /> },
-      { path: '/faq', index: true, element: <FAQ /> },
-      { path: '/auth/login', index: true, element: <Login /> },
-      { path: '/auth/register', index: true, element: <Register /> },
+      { path: 'about', element: <About /> },
+      { path: 'products', element: <Products /> },
+      { path: 'contact', element: <Contact /> },
+      { path: 'faq', element: <FAQ /> },
+      { path: 'auth/login', element: <Login /> },
+      { path: 'auth/register', element: <Register /> },
+      {
+        path: 'react-store', element: <ProtectedRoutes />,
+        children: [
+          { path: 'profile', element: <Profile /> },
+          { path: 'cart', element: <Cart /> }
+        ]
+      },
     ]
   }
 ])
