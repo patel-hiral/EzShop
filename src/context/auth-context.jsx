@@ -25,27 +25,6 @@ export default function AuthProvider({ children }) {
     }, []);
 
 
-    async function getAuthUser() {
-        try {
-            const response = await fetch('https://dummyjson.com/auth/me', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                },
-                credentials: 'include'
-            })
-            if (!response.ok) {
-                return console.log('Failed To Get User');
-            }
-            const resData = await response.json();
-            return resData;
-        } catch (error) {
-            console.log('Error : ', error);
-        }
-    }
-
-
-
     async function register(formData, navigate) {
         try {
             setLoading(true);
@@ -111,6 +90,7 @@ export default function AuthProvider({ children }) {
 
             const accessToken = resData.accessToken;
             localStorage.setItem('accessToken', accessToken)
+            setUser(resData)
             setToken(accessToken)
             setLoading(false)
 
