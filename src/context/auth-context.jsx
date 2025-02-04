@@ -1,39 +1,18 @@
 import { createContext, useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { getAuthToken } from "@/utils/getAuthToken";
-
+import { useDispatch, useSelector } from "react-redux";
 export const AuthContext = createContext();
+import { setUser } from "@/store/authSlice";
 
 export default function AuthProvider({ children }) {
 
-    const [user, setUser] = useState(() => {
-        const userData = localStorage.getItem("user");
-        return userData ? JSON.parse(userData) : null;
-    });
+    const { user } = useSelector((state) => state.auth)
 
-    useEffect(() => {
-        if (user) {
-            localStorage.setItem("user", JSON.stringify(user));
-        } else {
-            localStorage.removeItem("user");
-        }
-    }, [user]);
+    const dispatch = useDispatch();
 
     const [isLoading, setLoading] = useState(false);
     const [token, setToken] = useState(() => localStorage.getItem("accessToken") || null);
     const { toast } = useToast();
-
-    useEffect(() => {
-        const authToken = getAuthToken();
-        if (!authToken) {
-            logout();
-        } else {
-            setToken(authToken);
-        }
-    }, []);
-
-
-
 
     async function register(formData, navigate) {
         try {
@@ -47,6 +26,7 @@ export default function AuthProvider({ children }) {
             if (!response.ok) throw new Error("Registration failed");
 
             const data = await response.json();
+
             setLoading(false);
             toast({ title: "Success", description: "Account Created Successfully!" });
             if (navigate) navigate("/auth/login");
@@ -74,7 +54,7 @@ export default function AuthProvider({ children }) {
             const accessToken = resData.accessToken;
             localStorage.setItem("accessToken", accessToken);
 
-            setUser(resData);
+            dispatch(setUser(resData))
             setToken(accessToken);
             setLoading(false);
 
@@ -88,10 +68,10 @@ export default function AuthProvider({ children }) {
     }
 
     function logout() {
-        localStorage.removeItem("accessToken");
+        localStorage.removeItem("persist:root");
         localStorage.removeItem("user");
-        setUser(null);
-        setToken(null);
+        dispatch(setUser(null));
+        dispatch(setToken(null));
         toast({ title: "Logged Out", description: "You have been successfully logged out." });
     }
 

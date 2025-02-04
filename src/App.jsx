@@ -3,7 +3,7 @@ import { ThemeProvider } from './components/theme-context'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RootLayout from './layout/RootLayout'
 import Home from './pages/Home'
-import Products from './pages/Products'
+import Products, { getAllProducts } from './pages/Products'
 import Contact from './pages/Contact'
 import FAQ from './pages/FAQ'
 import Login from './pages/Auth/Login'
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     path: '/', element: <RootLayout />, children: [
       { path: '', index: true, element: <Home /> },
       { path: 'about', element: <About /> },
-      { path: 'products', element: <Products /> },
+      { path: 'products', element: <Products />, loader: getAllProducts },
       { path: 'contact', element: <Contact /> },
       { path: 'faq', element: <FAQ /> },
       { path: 'auth/login', element: <Login /> },
@@ -31,7 +31,6 @@ const router = createBrowserRouter([
           { path: 'profile', element: <Profile /> },
           { path: 'cart', element: <Cart /> },
           { path: 'orders', element: <Orders /> },
-
         ]
       },
     ]

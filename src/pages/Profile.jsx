@@ -1,12 +1,6 @@
-import React from 'react'
-import { useLocation } from "react-router-dom";
+import React from "react";
 function Profile() {
-    const location = useLocation();
-    const data = location.state;
-    console.log("data are :: ", data);
-    return (
-        <div>Profile</div>
-    )
+  return <div>Profile</div>;
 }
 
-export default Profile
+export default Profile;

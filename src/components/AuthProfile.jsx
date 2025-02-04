@@ -16,6 +16,7 @@ import { Link } from "react-router-dom"
 
 export default function AuthProfile({ image }) {
     const { logout } = useContext(AuthContext)
+    
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild className="border border-secondary cursor-pointer">
