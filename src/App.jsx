@@ -13,6 +13,7 @@ import { Toaster } from './components/ui/toaster'
 import Profile from './pages/Profile'
 import ProtectedRoutes from './layout/ProtectedRoutes'
 import Cart from './pages/Cart'
+import Orders from './pages/Orders'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,9 @@ const router = createBrowserRouter([
         path: 'react-store', element: <ProtectedRoutes />,
         children: [
           { path: 'profile', element: <Profile /> },
-          { path: 'cart', element: <Cart /> }
+          { path: 'cart', element: <Cart /> },
+          { path: 'orders', element: <Orders /> },
+
         ]
       },
     ]

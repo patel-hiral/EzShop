@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import { AuthContext } from "@/context/auth-context"
+import { Loader2 } from "lucide-react"
 export function LoginForm({
   className,
   ...props
@@ -60,21 +61,21 @@ export function LoginForm({
                   <Label htmlFor="username">Username</Label>
                   <Input id="email" onChange={(e) => {
                     setuserName(e.target.value)
-                  }} type="text" placeholder="example" required />
+                  }} type="text" placeholder="Enter Username" required />
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password" >Password</Label>
                     <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
                       Forgot your password?
                     </a>
                   </div>
-                  <Input id="password" onChange={(e) => {
+                  <Input id="password" placeholder="Enter Password" onChange={(e) => {
                     setPassword(e.target.value)
                   }} type="password" required />
                 </div>
                 <Button disabled={isLoading} type="submit" className="w-full">
-                  {isLoading ? 'Loging in...' : 'Login'}
+                  {isLoading ? <Loader2 /> : 'Login'}
                 </Button>
               </div>
               <div className="text-center text-sm">

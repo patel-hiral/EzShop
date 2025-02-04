@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import { Button } from './ui/button'
 import { ModeToggle } from './mode-toggle'
 import { AuthContext } from '@/context/auth-context'
@@ -13,15 +13,14 @@ const navItems = [
     { id: "05", path: '/faq', title: "FAQ" },
 ]
 function Header() {
-    const { user, logout } = useContext(AuthContext);
-
+    const { user } = useContext(AuthContext);
     return (
-        <div className='flex items-center justify-between py-4 px-20 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-white dark:bg-black'>
-            <Link to={navItems[0].path} className='text-3xl'>React Store</Link>
+        <header className='flex z-20 items-center justify-between py-2 px-10 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-white dark:bg-black'>
+            <NavLink to={navItems[0].path} className='text-3xl font-medium font-mono' ><img src="/bug-store.svg" alt="BugStore" className='max-h-12'/></NavLink>
             <nav className='flex gap-10'>
                 <ul className='flex items-center gap-5'>
                     {navItems.map((item) =>
-                        <Link to={item.path} className='dark:text-slate-300 text-sm' key={item.id}>{item.title}</Link>
+                        <NavLink to={item.path} className='dark:text-slate-300 text-sm' key={item.id}>{item.title}</NavLink>
                     )}
                 </ul>
                 <div className="auth-section flex items-center gap-8">
@@ -29,13 +28,13 @@ function Header() {
                         <AuthProfile image={user.image} />
                     ) : (
                         <Button variant="secondary">
-                            <Link to="/auth/login">Login</Link>
+                            <NavLink to="/auth/login">Login</NavLink>
                         </Button>
                     )}
                     <ModeToggle />
                 </div>
             </nav>
-        </div>
+        </header>
     )
 }
 
