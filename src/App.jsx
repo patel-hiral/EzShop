@@ -14,7 +14,7 @@ import Profile from './pages/Profile'
 import ProtectedRoutes from './layout/ProtectedRoutes'
 import Cart from './pages/Cart'
 import Orders from './pages/Orders'
-import ProductDetails from './pages/product-details'
+import ProductDetails, { getProduct } from './pages/product-details'
 
 const Products = lazy(() => import('../src/pages/Products'))
 
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       { path: 'faq', element: <FAQ /> },
       { path: 'auth/login', element: <Login /> },
       { path: 'auth/register', element: <Register /> },
-      { path: 'products/:id', element: <ProductDetails /> },
+      { path: 'products/:id', element: <ProductDetails />, loader: getProduct },
       {
         path: 'react-store', element: <ProtectedRoutes />,
         children: [

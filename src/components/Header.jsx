@@ -16,9 +16,6 @@ const navItems = [
 
 function Header() {
     const { user } = useSelector((state) => state.user);
-    console.log('User::', user);
-
-
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (

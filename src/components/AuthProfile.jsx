@@ -16,17 +16,20 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { useSelector } from "react-redux";
 
 export default function AuthProfile({ image }) {
-    
+
+    const cartItems = useSelector((state) => state.cart.items);
+
     const { logout } = useContext(AuthContext);
     const [isSheetOpen, setIsSheetOpen] = useState(false);
-    
+
     return (
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild className="border border-secondary cursor-pointer">
-                    <Avatar>
+                    <Avatar className="w-8 h-8">
                         <AvatarImage src={image} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
@@ -61,13 +64,30 @@ export default function AuthProfile({ image }) {
 
             {/* Sheet for Cart */}
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-                <SheetContent>
+                <SheetContent className="overflow-y-auto">
                     <SheetHeader>
                         <SheetTitle>Your Cart</SheetTitle>
                         <SheetDescription>
-                            Here you can review items in your cart before checkout.
+                            {cartItems.length < 0 &&'Cart is Empty right now. Add some products to cart.'}
                         </SheetDescription>
-                    </SheetHeader>
+
+                        <SheetDescription>
+                            Total Items: {cartItems.length}
+                        </SheetDescription>
+                        </SheetHeader>
+
+                     {cartItems.map((item)=>{
+                            return (
+                                <div key={item.id} className="flex items-center justify-between py-2 border-b border-secondary">
+                                    <img src={item.thumbnail} alt={item.name} className="w-12 h-12" />
+                                    <div className="flex-1 px-2">
+                                        <h1 className="text-sm">{item.title}</h1>
+                                        <p className="text-xs text-gray-500">{item.price}</p>
+                                    </div>
+                                    <p className="text-sm font-semibold">${item.price}</p>
+                                </div>
+                            )   
+                     })}
                 </SheetContent>
             </Sheet>
         </>

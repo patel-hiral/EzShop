@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction, logoutAction } from "@/store/slices/userSlice";
@@ -8,7 +8,7 @@ export const AuthContext = createContext();
 export default function AuthProvider({ children }) {
 
     const { user } = useSelector((state) => state.user);
-    
+
     const cart = useSelector((state) => state.cart);
 
     const dispatch = useDispatch();
@@ -39,20 +39,6 @@ export default function AuthProvider({ children }) {
         }
     }
 
-    async function getCart() {
-        try {
-            const response = await fetch('https://dummyjson.com/carts/user/' + userId)
-            if (!response.ok) {
-                return console.log('Error Fetching Cart Of User');
-            }
-            const cartData = await response.json();
-            console.log(cartData);
-            return cartData.products
-        } catch (error) {
-            console.log('error fetching cart data::', error);
-        }
-    }
-
     async function login({ username, password }, navigate) {
         try {
             setLoading(true);
@@ -70,7 +56,6 @@ export default function AuthProvider({ children }) {
             const resData = await response.json();
             const accessToken = resData.accessToken;
             dispatch(loginAction(resData))
-
             localStorage.setItem("accessToken", accessToken);
             setLoading(false);
             toast({ title: "Login Success", description: `Welcome ${resData.firstName}` });

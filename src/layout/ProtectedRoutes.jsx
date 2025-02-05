@@ -1,15 +1,15 @@
 import Header from '@/components/Header'
-import { AuthContext } from '@/context/auth-context'
-import React, { useContext } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Outlet, Navigate } from 'react-router-dom'
 
 function ProtectedRoutes() {
-    const { token } = useContext(AuthContext)
-    return token ?
-        <>
+    const { user } = useSelector((state) => state.user)
+    return user ?
+        <React.Fragment>
             <Header />
             <Outlet />
-        </>
+        </React.Fragment>
         : <Navigate to="/auth/login" />
 }
 
