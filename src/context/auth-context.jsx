@@ -1,17 +1,20 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { loginAction, logoutAction } from "@/store/slices/userSlice";
+
 export const AuthContext = createContext();
-import { setUser } from "@/store/authSlice";
 
 export default function AuthProvider({ children }) {
 
-    const { user } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.user);
+    
+    const cart = useSelector((state) => state.cart);
 
     const dispatch = useDispatch();
 
     const [isLoading, setLoading] = useState(false);
-    const [token, setToken] = useState(() => localStorage.getItem("accessToken") || null);
+
     const { toast } = useToast();
 
     async function register(formData, navigate) {
@@ -36,6 +39,20 @@ export default function AuthProvider({ children }) {
         }
     }
 
+    async function getCart() {
+        try {
+            const response = await fetch('https://dummyjson.com/carts/user/' + userId)
+            if (!response.ok) {
+                return console.log('Error Fetching Cart Of User');
+            }
+            const cartData = await response.json();
+            console.log(cartData);
+            return cartData.products
+        } catch (error) {
+            console.log('error fetching cart data::', error);
+        }
+    }
+
     async function login({ username, password }, navigate) {
         try {
             setLoading(true);
@@ -52,15 +69,12 @@ export default function AuthProvider({ children }) {
 
             const resData = await response.json();
             const accessToken = resData.accessToken;
+            dispatch(loginAction(resData))
+
             localStorage.setItem("accessToken", accessToken);
-
-            dispatch(setUser(resData))
-            setToken(accessToken);
             setLoading(false);
-
             toast({ title: "Login Success", description: `Welcome ${resData.firstName}` });
             navigate("/react-store/profile");
-
         } catch (error) {
             setLoading(false);
             toast({ title: "Error", description: error.message || "Login Failed...", variant: "destructive" });
@@ -68,15 +82,12 @@ export default function AuthProvider({ children }) {
     }
 
     function logout() {
-        localStorage.removeItem("persist:root");
-        localStorage.removeItem("user");
-        dispatch(setUser(null));
-        dispatch(setToken(null));
+        dispatch(logoutAction())
         toast({ title: "Logged Out", description: "You have been successfully logged out." });
     }
 
     return (
-        <AuthContext.Provider value={{ register, isLoading, login, token, user, logout }}>
+        <AuthContext.Provider value={{ register, isLoading, login, user, logout }}>
             {children}
         </AuthContext.Provider>
     );

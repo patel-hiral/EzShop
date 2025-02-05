@@ -1,6 +1,7 @@
 import Product from '@/components/Product';
 import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
+
 function Products() {
   const products = useLoaderData();
   console.log('Products::', products);
@@ -9,9 +10,9 @@ function Products() {
     <ul className='flex justify-evenly flex-wrap gap-5'>
       {products.map((product) => {
         return (
-          <li key={product.id}>
+          <Link to={`${product.id}`} key={product.id}>
             <Product product={product} />
-          </li>
+          </Link>
         )
       })}
     </ul>

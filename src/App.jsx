@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { ThemeProvider } from './components/theme-context'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RootLayout from './layout/RootLayout'
 import Home from './pages/Home'
-import Products, { getAllProducts } from './pages/Products'
+import { getAllProducts } from './pages/Products'
 import Contact from './pages/Contact'
 import FAQ from './pages/FAQ'
 import Login from './pages/Auth/Login'
@@ -14,6 +14,9 @@ import Profile from './pages/Profile'
 import ProtectedRoutes from './layout/ProtectedRoutes'
 import Cart from './pages/Cart'
 import Orders from './pages/Orders'
+import ProductDetails from './pages/product-details'
+
+const Products = lazy(() => import('../src/pages/Products'))
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,7 @@ const router = createBrowserRouter([
       { path: 'faq', element: <FAQ /> },
       { path: 'auth/login', element: <Login /> },
       { path: 'auth/register', element: <Register /> },
+      { path: 'products/:id', element: <ProductDetails /> },
       {
         path: 'react-store', element: <ProtectedRoutes />,
         children: [

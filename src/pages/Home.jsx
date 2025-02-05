@@ -6,45 +6,44 @@ function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="hero-section ">
-        <h1 className="text-center text-8xl py-8 font-semibold">
-          Shop Everything you need{" "}
-          <span className="text-indigo-700">online</span> from us
-        </h1>
-        <div className="mx-auto w-fit pb-8">
-          <Button variant="outline">Get Started</Button>
-        </div>
-        <div className="cards-container py-2 flex gap-6 items-center">
-          <Card className="w-1/5 h-80 overflow-hidden">
-            <img
-              className="object-cover w-full h-full"
-              src="https://us.tonies.com/cdn/shop/files/Tonies-PDP-Assets-headphones-green-main.jpg?v=1713251407&width=3000"
-              alt=""
-            />
-          </Card>
-          <Card className="w-1/5 mt-20 overflow-hidden">
-            <img
-              className="object-cover w-full h-full"
-              src="https://purplesecret.in/cdn/shop/files/TBAG00422_1.jpg?v=1710245990"
-              alt=""
-            />
-          </Card>
-          <Card className="w-1/6 h-80 overflow-hidden mb-10 mt-4">
-            <img
-              className="object-cover w-full h-full"
-              src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
-          </Card>
-          <Card className="flex-1 mb-10 overflow-hidden">
-            <img
-              className="object-cover w-full h-full"
-              src="https://www.atulhost.com/wp-content/uploads/2024/07/best-laptop-brands.jpg"
-              alt=""
-            />
-          </Card>
-        </div>
-      </section>
+      <section className="hero-section px-4 md:px-8 lg:px-16 py-12 text-center">
+      <h1 className="text-4xl md:text-6xl lg:text-8xl font-semibold py-6">
+        Shop Everything you need <span className="text-indigo-700">online</span> from us
+      </h1>
+      <div className="mx-auto w-fit pb-6">
+        <Button variant="outline">Get Started</Button>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center items-center">
+        <Card className="min-w-[250px] h-80 overflow-hidden">
+          <img
+            className="object-cover w-full h-full"
+            src="https://us.tonies.com/cdn/shop/files/Tonies-PDP-Assets-headphones-green-main.jpg?v=1713251407&width=3000"
+            alt=""
+          />
+        </Card>
+        <Card className="min-w-[250px] h-80 overflow-hidden">
+          <img
+            className="object-cover w-full h-full"
+            src="https://purplesecret.in/cdn/shop/files/TBAG00422_1.jpg?v=1710245990"
+            alt=""
+          />
+        </Card>
+        <Card className="min-w-[250px] h-80 overflow-hidden">
+          <img
+            className="object-cover w-full h-full"
+            src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+        </Card>
+        <Card className="min-w-[250px] h-80 overflow-hidden">
+          <img
+            className="object-cover w-full h-full"
+            src="https://www.atulhost.com/wp-content/uploads/2024/07/best-laptop-brands.jpg"
+            alt=""
+          />
+        </Card>
+      </div>
+    </section>
       {/* Section 2 */}
       <section>
         <div className="bg-gray-50 dark:bg-slate-700 py-24 sm:py-32 rounded-md">
