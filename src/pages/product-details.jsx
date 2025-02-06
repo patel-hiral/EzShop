@@ -1,21 +1,33 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import { ShoppingCart, StarIcon, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
+import { useToast } from "@/hooks/use-toast";
 function ProductDetails() {
+    const redirect = useNavigate();
+    const { user } = useSelector((state) => state.user);
+    const { toast } = useToast();
     const dispatch = useDispatch();
     const product = useLoaderData();
     const { id } = useParams();
-    console.log("Product::", product);
+
+    function handleAddToCart() {
+        if (!user) {
+            toast({title:"Please login to proceed"});
+            return redirect("/auth/login");
+        }
+        dispatch(addToCart(product));
+        toast({ title: "Added to cart",description:"Product added to cart successfully!" });
+    }
     return (
         <section className="flex">
             <div className="images-container flex-shrink-0 w-1/3 relative border border-secondary p-4">
                 <img src={product.thumbnail} alt={product.name} className="w-full" />
                 <div className="actions-container flex item-center gap-5">
-                    <Button onClick={() => dispatch(addToCart(product))} className="w-1/2 uppercase" variant="secondary"><ShoppingCart /> Add To Cart</Button>
+                    <Button onClick={handleAddToCart} className="w-1/2 uppercase" variant="secondary"><ShoppingCart /> Add To Cart</Button>
                     <Button className="w-1/2 uppercase"><Zap />Buy Now</Button>
                 </div>
             </div>

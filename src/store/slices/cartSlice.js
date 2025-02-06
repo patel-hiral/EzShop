@@ -12,10 +12,28 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
+      const existingItem = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+      if (existingItem) {
+        existingItem.quantity += 1;
+        localStorage.setItem("cart", JSON.stringify(state.items));
+        return;
+      }
+
+      action.payload.quantity = 1;
       state.items.push(action.payload);
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
     removeFromCart: (state, action) => {
+      const existingItem = state.items.find(
+        (item) => item.id === action.payload
+      );
+      if (existingItem.quantity > 1) {
+        existingItem.quantity -= 1;
+        localStorage.setItem("cart", JSON.stringify(state.items));
+        return;
+      }
       state.items = state.items.filter((item) => item.id !== action.payload);
       localStorage.setItem("cart", JSON.stringify(state.items));
     },

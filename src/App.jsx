@@ -15,7 +15,6 @@ import ProtectedRoutes from './layout/ProtectedRoutes'
 import Cart from './pages/Cart'
 import Orders from './pages/Orders'
 import ProductDetails, { getProduct } from './pages/product-details'
-
 const Products = lazy(() => import('../src/pages/Products'))
 
 const router = createBrowserRouter([

@@ -15,26 +15,40 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetDescription,
+} from "@/components/ui/sheet";
 import { useSelector } from "react-redux";
-
+import CartItem from "./CartItem";
+import { useDispatch } from "react-redux";
+import { clearCart } from "@/store/slices/cartSlice";
 export default function AuthProfile({ image }) {
-
+    const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.items);
-
     const { logout } = useContext(AuthContext);
     const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+    function handleCheckOut() {
+        dispatch(clearCart())
+    }
 
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger asChild className="border border-secondary cursor-pointer">
+                <DropdownMenuTrigger
+                    asChild
+                    className="border border-secondary cursor-pointer"
+                >
                     <Avatar className="w-8 h-8">
                         <AvatarImage src={image} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
+                <DropdownMenuContent className="min-w-40">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
@@ -57,37 +71,34 @@ export default function AuthProfile({ image }) {
                     <DropdownMenuItem>Support</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Button variant="outline" onClick={() => logout()}>Logout</Button>
+                        <Button variant="outline" onClick={() => logout()}>
+                            Logout
+                        </Button>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
 
             {/* Sheet for Cart */}
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-                <SheetContent className="overflow-y-auto">
+                <SheetContent className="overflow-y-auto min-w-96">
                     <SheetHeader>
                         <SheetTitle>Your Cart</SheetTitle>
                         <SheetDescription>
-                            {cartItems.length < 0 &&'Cart is Empty right now. Add some products to cart.'}
+                            {cartItems.length <= 0 &&
+                                "Cart is Empty right now. Add some products to cart."}
                         </SheetDescription>
-
                         <SheetDescription>
-                            Total Items: {cartItems.length}
+                            {cartItems.length > 0 && (
+                                <span>Total Items: {cartItems.length}</span>
+                            )}
                         </SheetDescription>
-                        </SheetHeader>
-
-                     {cartItems.map((item)=>{
-                            return (
-                                <div key={item.id} className="flex items-center justify-between py-2 border-b border-secondary">
-                                    <img src={item.thumbnail} alt={item.name} className="w-12 h-12" />
-                                    <div className="flex-1 px-2">
-                                        <h1 className="text-sm">{item.title}</h1>
-                                        <p className="text-xs text-gray-500">{item.price}</p>
-                                    </div>
-                                    <p className="text-sm font-semibold">${item.price}</p>
-                                </div>
-                            )   
-                     })}
+                    </SheetHeader>
+                    {cartItems.map((item) => {
+                        return <CartItem item={item} key={item.id} />;
+                    })}
+                    {cartItems.length > 0 &&
+                        <Button onClick={handleCheckOut} variant="secondary" className="my-2">Check Out</Button>
+                    }
                 </SheetContent>
             </Sheet>
         </>
