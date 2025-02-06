@@ -1,14 +1,31 @@
-import React from 'react'
+import CartItem from '@/components/CartItem'
+import { Button } from '@/components/ui/button'
+import { toast } from '@/hooks/use-toast'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+function CheckOut() {
+    const cartItems = useSelector((state) => state.cart.items)
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (cartItems.length <= 0) {
+            navigate("/products")
+        }
+    }, [cartItems])
 
-function CheckOut({ onClose }) {
     return (
-        <modal className='h-screen flex items-center justify-center'>
-            <div className="card w-[350px] h-[350px] flex items-center justify-center bg-green-700">
-                <h1 className='text-center text-6xl'>Order Placed Successfully...</h1>
-                <p className='text-center text-4xl'>Thank you for shopping with us</p>
+        <div>
+            {cartItems.map((item) => {
+                return (
+                    <CartItem item={item} key={item.id} />
+                )
+            })}
+            <div className='py-2 flex items-center justify-between'>
+                <p>Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</p>
+                <Button>Confirm Order</Button>
             </div>
-            <button onClick={onclose}>Close</button>
-        </modal>
+
+        </div>
     )
 }
 

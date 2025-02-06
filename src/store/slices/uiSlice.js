@@ -3,17 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const uiSlice = createSlice({
   name: "ui",
   initialState: {
-    showCheckOut: false,
+    isLoading: false,
   },
   reducers: {
-    showCheckout: (state) => {
-      state.showCheckOut = true;
+    setLoading: (state) => {
+      state.isLoading = true;
     },
-    hideCheckOut: (state) => {
-      state.showCheckOut = false;
+    setResolved: (state) => {
+      state.isLoading = false;
     },
   },
 });
 
-export const { showCheckout, hideCheckOut } = uiSlice.actions;
+export const { setLoading, setResolved } = uiSlice.actions;
 export default uiSlice.reducer;

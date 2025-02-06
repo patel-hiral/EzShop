@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import { ShoppingCart, StarIcon, Zap } from "lucide-react";
@@ -6,21 +6,30 @@ import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
 import { useToast } from "@/hooks/use-toast";
+import { setLoading, setResolved } from "@/store/slices/uiSlice";
 function ProductDetails() {
     const redirect = useNavigate();
     const { user } = useSelector((state) => state.user);
     const { toast } = useToast();
     const dispatch = useDispatch();
     const product = useLoaderData();
-    const { id } = useParams();
+
+    useEffect(() => {
+        dispatch(setLoading());
+        if (product) {
+            setTimeout(() => {
+                dispatch(setResolved())
+            }, 500)
+        }
+    }, [product])
 
     function handleAddToCart() {
         if (!user) {
-            toast({title:"Please login to proceed"});
+            toast({ title: "Please login to proceed" });
             return redirect("/auth/login");
         }
         dispatch(addToCart(product));
-        toast({ title: "Added to cart",description:"Product added to cart successfully!" });
+        toast({ title: "Added to cart", description: "Product added to cart successfully!" });
     }
     return (
         <section className="flex">

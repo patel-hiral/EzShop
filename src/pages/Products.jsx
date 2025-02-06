@@ -1,9 +1,22 @@
 import Product from '@/components/Product';
-import React from 'react'
+import { setLoading, setResolved } from '@/store/slices/uiSlice';
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import { Link, useLoaderData } from 'react-router-dom'
 
 function Products() {
+  
   const products = useLoaderData();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setLoading());
+    if (products) {
+      setTimeout(() => {
+        dispatch(setResolved())
+      }, 500)
+    }
+  }, [products])
+
   console.log('Products::', products);
 
   return (

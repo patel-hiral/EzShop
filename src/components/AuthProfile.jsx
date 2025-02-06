@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "@/context/auth-context";
 
 import { Button } from "@/components/ui/button";
@@ -24,16 +24,16 @@ import {
 } from "@/components/ui/sheet";
 import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
-import { useDispatch } from "react-redux";
-import { clearCart } from "@/store/slices/cartSlice";
+
 export default function AuthProfile({ image }) {
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const cartItems = useSelector((state) => state.cart.items);
     const { logout } = useContext(AuthContext);
     const [isSheetOpen, setIsSheetOpen] = useState(false);
 
     function handleCheckOut() {
-        dispatch(clearCart())
+        setIsSheetOpen(false)
+        navigate("/react-store/checkout")
     }
 
     return (
