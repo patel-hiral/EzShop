@@ -1,7 +1,6 @@
 import CartItem from '@/components/CartItem'
 import { Button } from '@/components/ui/button'
 import { toast, useToast } from '@/hooks/use-toast'
-import { Description } from '@radix-ui/react-dialog'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +17,7 @@ function CheckOut() {
     }, [cartItems])
 
     return (
-        <div>
+        <div className='px-4'>
             {cartItems.map((item) => {
                 return (
                     <CartItem item={item} key={item.id} />
@@ -28,7 +27,6 @@ function CheckOut() {
                 <p>Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</p>
                 <Button>Confirm Order</Button>
             </div>
-
         </div>
     )
 }

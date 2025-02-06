@@ -32,15 +32,15 @@ function ProductDetails() {
         toast({ title: "Added to cart", description: "Product added to cart successfully!" });
     }
     return (
-        <section className="flex">
-            <div className="images-container flex-shrink-0 w-1/3 relative border border-secondary p-4">
+        <section className="flex flex-col lg:flex-row">
+            <div className="images-container flex-shrink-0 w-full lg:w-1/3 relative md:border border-secondary p-4">
                 <img src={product.thumbnail} alt={product.name} className="w-full" />
                 <div className="actions-container flex item-center gap-5">
                     <Button onClick={handleAddToCart} className="w-1/2 uppercase" variant="secondary"><ShoppingCart /> Add To Cart</Button>
                     <Button className="w-1/2 uppercase"><Zap />Buy Now</Button>
                 </div>
             </div>
-            <div className="details-section flex-1 p-2">
+            <div className="details-section flex-1 p-6 md:p-2">
                 <h1 className="text-xl">{product.title}</h1>
                 <p className="flex items-center py-2">
                     <span className="bg-green-700 py-[2px] text-white text-xs items-center px-1 rounded-sm flex w-fit font-semibold">

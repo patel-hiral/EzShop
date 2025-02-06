@@ -21,7 +21,7 @@ function Header() {
     return (
         <header className="flex z-20 items-center justify-between py-2 px-6 md:px-20 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-[#ffffff88] dark:bg-[#0000009e] backdrop-blur-md">
             <NavLink to={navItems[0].path} className="text-3xl font-medium font-mono">
-                <img src="/bug-store.png" alt="BugStore" className="max-h-12" />
+                <img src="/bug-store.png" alt="BugStore" className="h-7 sm:max-h-12" />
             </NavLink>
 
             <div className="md:hidden">
@@ -29,7 +29,7 @@ function Header() {
                     {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
             </div>
-            <nav className={`absolute md:static top-16 left-0 w-full md:w-auto md:bg-transparent md:flex md:items-center md:gap-10 transition-transform ${menuOpen ? "block" : "hidden"}`}>
+            <nav className={`absolute md:static top-16 bg-white dark:bg-black md:dark:bg-transparent left-0 w-full md:w-auto md:bg-transparent md:flex md:items-center md:gap-10 transition-transform ${menuOpen ? "block" : "hidden"}`}>
                 <ul className="flex flex-col md:flex-row items-center gap-5 p-5 md:p-0">
                     {navItems.map((item) => (
                         <NavLink
