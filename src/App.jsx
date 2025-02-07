@@ -7,6 +7,7 @@ import { Toaster } from './components/ui/toaster'
 import { ThemeProvider } from './context/theme-context'
 import Loader from './components/Loader'
 import NewHome from './pages/NewHome'
+import Orders from './pages/Orders'
 
 const Products = lazy(() => import('../src/pages/Products'))
 const ProductDetails = lazy(() => import('../src/pages/product-details'))
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
           { path: 'profile', element: <Profile /> },
           { path: 'cart', element: <Cart /> },
           { path: 'checkout', element: <CheckOut /> },
+          { path: 'orders', element: <Orders /> },
         ]
       },
     ]

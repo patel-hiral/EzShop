@@ -1,27 +1,28 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
 import AuthProfile from "./AuthProfile";
 import { useSelector } from "react-redux";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingBag, ShoppingBasketIcon, X } from "lucide-react";
 
 const navItems = [
-    { id: "01", path: "/", title: "Home" },
-    { id: "02", path: "/about", title: "About" },
-    { id: "03", path: "/products", title: "Products" },
+    { id: "01", path: "/", title: "" },
+    { id: "02", path: "/products", title: "Products" },
+    { id: "03", path: "/about", title: "About" },
     { id: "04", path: "/contact", title: "Contact" },
     { id: "05", path: "/faq", title: "FAQ" },
 ];
 
 function Header() {
     const { user } = useSelector((state) => state.user);
+    const cartItems = useSelector((state) => state.cart.items);
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <header className="flex z-20 items-center justify-between py-2 px-6 md:px-20 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-[#ffffff88] dark:bg-[#0000009e] backdrop-blur-md">
+        <header className="flex z-20 items-center justify-between py-3 px-6 md:px-20 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-[#ffffff88] dark:bg-[#0000009e] backdrop-blur-md">
             <NavLink to={navItems[0].path} className="text-3xl font-medium font-mono">
-                <img src="/bug-store.png" alt="BugStore" className="h-7 sm:max-h-12" />
+                <img src="/bug-store.png" alt="BugStore" className="h-7 sm:max-h-12 md:h-10" />
             </NavLink>
 
             <div className="md:hidden">
@@ -46,7 +47,15 @@ function Header() {
                 </ul>
                 <div className="auth-section flex flex-col md:flex-row items-center gap-5 md:gap-8 p-5 md:p-0">
                     {user ? (
-                         <AuthProfile image={user.image} />
+                        <p className="flex items-center gap-5">
+                            <Link to="/react-store/cart" className="relative">
+                                <ShoppingBag className="w-5 h-5" />
+                                <div className="absolute -top-2 -right-2 z-10 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                                    {cartItems.length}
+                                </div>
+                            </Link>
+                            <AuthProfile image={user.image} />
+                        </p>
                     ) : (
                         <Button variant="secondary" onClick={() => setMenuOpen(false)}>
                             <NavLink to="/auth/login">Login</NavLink>
