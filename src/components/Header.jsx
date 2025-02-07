@@ -46,7 +46,7 @@ function Header() {
                 </ul>
                 <div className="auth-section flex flex-col md:flex-row items-center gap-5 md:gap-8 p-5 md:p-0">
                     {user ? (
-                        <AuthProfile image={user.image} />
+                         <AuthProfile image={user.image} />
                     ) : (
                         <Button variant="secondary" onClick={() => setMenuOpen(false)}>
                             <NavLink to="/auth/login">Login</NavLink>

@@ -1,28 +1,31 @@
-import React, { lazy, Suspense } from 'react'
-import { ThemeProvider } from './components/theme-context'
+import React, { lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import RootLayout from './layout/RootLayout'
-import Home from './pages/Home'
-import Loader from './components/Loader'
 import { getAllProducts } from './pages/Products'
-import Contact from './pages/Contact'
-import FAQ from './pages/FAQ'
-import Login from './pages/Auth/Login'
-import Register from './pages/Auth/Register'
-import About from './pages/About'
-import { Toaster } from './components/ui/toaster'
-import Profile from './pages/Profile'
-import ProtectedRoutes from './layout/ProtectedRoutes'
-import Cart from './pages/Cart'
-import ProductDetails, { getProduct } from './pages/product-details'
-import CheckOut from './pages/CheckOut'
+import { getProduct } from './pages/product-details'
 import { useSelector } from 'react-redux'
-const Products = lazy(() => import('../src/pages/Products'))
+import { Toaster } from './components/ui/toaster'
+import { ThemeProvider } from './context/theme-context'
+import Loader from './components/Loader'
+import NewHome from './pages/NewHome'
 
-const router = createBrowserRouter([
+const Products = lazy(() => import('../src/pages/Products'))
+const ProductDetails = lazy(() => import('../src/pages/product-details'))
+const ProtectedRoutes = lazy(() => import('../src/layout/ProtectedRoutes'))
+const Cart = lazy(() => import('../src/pages/Cart'))
+const CheckOut = lazy(() => import('../src/pages/CheckOut'))
+const Profile = lazy(() => import('../src/pages/Profile'))
+const Home = lazy(() => import('../src/pages/Home'))
+const About = lazy(() => import('../src/pages/About'))
+const Contact = lazy(() => import('../src/pages/Contact'))
+const FAQ = lazy(() => import('../src/pages/FAQ'))
+const Login = lazy(() => import('../src/pages/Auth/Login'))
+const Register = lazy(() => import('../src/pages/Auth/Register'))
+const RootLayout = lazy(() => import('../src/layout/RootLayout'))
+
+const router = createBrowserRouter([  
   {
     path: '/', element: <RootLayout />, children: [
-      { path: '', index: true, element: <Home /> },
+      { path: '', index: true, element: <NewHome /> },
       { path: 'about', element: <About /> },
       { path: 'products', element: <Products />, loader: getAllProducts },
       { path: 'contact', element: <Contact /> },
@@ -44,7 +47,7 @@ const router = createBrowserRouter([
 
 function App() {
   const isLoading = useSelector((state) => state.ui.isLoading)
-  
+
   return (
     <ThemeProvider defaultTheme='dark' storageKey="vite-ui-theme" >
       <RouterProvider router={router} />
