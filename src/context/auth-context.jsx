@@ -55,11 +55,16 @@ export default function AuthProvider({ children }) {
 
             const resData = await response.json();
             const accessToken = resData.accessToken;
+
             dispatch(loginAction(resData))
+
             localStorage.setItem("accessToken", accessToken);
+
             setLoading(false);
+
             toast({ title: "Login Success", description: `Welcome ${resData.firstName}` });
             navigate("/products");
+
         } catch (error) {
             setLoading(false);
             toast({ title: "Error", description: error.message || "Login Failed...", variant: "destructive" });
