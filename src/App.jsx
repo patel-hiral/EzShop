@@ -18,8 +18,8 @@ const Profile = lazy(() => import('../src/pages/Profile'))
 const About = lazy(() => import('../src/pages/About'))
 const Contact = lazy(() => import('../src/pages/Contact'))
 const FAQ = lazy(() => import('../src/pages/FAQ'))
-const Login = lazy(() => import('../src/pages/Auth/Login'))
-const Register = lazy(() => import('../src/pages/Auth/Register'))
+const Login = lazy(() => import('./pages/auth/Login'))
+const Register = lazy(() => import('./pages/auth/Register'))
 const RootLayout = lazy(() => import('../src/layout/RootLayout'))
 
 const router = createBrowserRouter([
