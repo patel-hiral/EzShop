@@ -59,7 +59,7 @@ export default function AuthProvider({ children }) {
             localStorage.setItem("accessToken", accessToken);
             setLoading(false);
             toast({ title: "Login Success", description: `Welcome ${resData.firstName}` });
-            navigate("/react-store/profile");
+            navigate("/products");
         } catch (error) {
             setLoading(false);
             toast({ title: "Error", description: error.message || "Login Failed...", variant: "destructive" });
