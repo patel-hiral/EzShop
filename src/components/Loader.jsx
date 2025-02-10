@@ -11,7 +11,8 @@ function Loader() {
   return createPortal(
     <div className="fixed inset-0 bg-[#00000083] backdrop-blur-sm flex items-center justify-center z-50">
       <Loader2 className="animate-spin text-white w-10 h-10" />
-    </div>,
+    </div>
+    ,
     document.getElementById("loader")
   );
 }

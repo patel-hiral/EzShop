@@ -9,8 +9,8 @@ function About() {
           <h2 className="mb-4 text-2xl font-bold tracking text-center text-gray-900 dark:text-white">
             Meet Our Team
           </h2>
-          <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
-            At EzStore, we are a diverse team of passionate professionals, each bringing
+          <p className="font-light sm:text-lg">
+            At EzShop, we are a diverse team of passionate professionals, each bringing
             unique talents and expertise to deliver exceptional service. Together, we are
             committed to building the best eCommerce experience for you.
           </p>
@@ -27,8 +27,8 @@ function About() {
                 />
                 <h3 className="text-xl text-center font-semibold text-gray-800 dark:text-white">Jane Doe</h3>
               </CardHeader>
-              <p className="text-gray-500 dark:text-gray-400">CEO & Founder</p>
-              <p className="mt-4 text-gray-600 dark:text-gray-300">
+              <p className="text-primary font-semibold">CEO & Founder</p>
+              <p className="mt-4 text-gray-600 text-sm">
                 Jane brings over 10 years of leadership experience in the tech industry. Her vision
                 is to create an innovative, user-centric eCommerce platform that empowers both
                 merchants and customers.
@@ -46,8 +46,8 @@ function About() {
                 />
                 <h3 className="text-xl text-center font-semibold text-gray-800 dark:text-white">Jane Doe</h3>
               </CardHeader>
-              <p className="text-gray-500 dark:text-gray-400">CEO & Founder</p>
-              <p className="mt-4 text-gray-600 dark:text-gray-300">
+              <p className="text-primary font-semibold">CEO & Founder</p>
+              <p className="mt-4 text-gray-600 text-sm">
                 Jane brings over 10 years of leadership experience in the tech industry. Her vision
                 is to create an innovative, user-centric eCommerce platform that empowers both
                 merchants and customers.
@@ -65,8 +65,8 @@ function About() {
                 />
                 <h3 className="text-xl text-center font-semibold text-gray-800 dark:text-white">Jane Doe</h3>
               </CardHeader>
-              <p className="text-gray-500 dark:text-gray-400">CEO & Founder</p>
-              <p className="mt-4 text-gray-600 dark:text-gray-300">
+              <p className="text-primary font-semibold">CEO & Founder</p>
+              <p className="mt-4 text-gray-600 text-sm">
                 Jane brings over 10 years of leadership experience in the tech industry. Her vision
                 is to create an innovative, user-centric eCommerce platform that empowers both
                 merchants and customers.
@@ -77,14 +77,17 @@ function About() {
 
         <div className="mt-16 text-center">
           <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Our Mission</h3>
-          <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
-            At EzStore, our mission is to revolutionize the way eCommerce works. We aim to provide
+          <p className="font-light text-gray-700">
+            At EzShop, our mission is to revolutionize the way eCommerce works. We aim to provide
             a seamless shopping experience for users and create a reliable, efficient platform for
             merchants to grow their businesses. We believe in innovation, quality, and customer
             satisfaction.
           </p>
         </div>
       </div>
+      <footer className="text-center py-4 text-gray-900 dark:text-gray-400">
+        @EzShop All rights Reserved! 2025
+      </footer>
     </section>
   );
 }

@@ -23,7 +23,7 @@ function Header() {
     return (
         <header className="flex z-20 items-center justify-between py-3 px-6 md:px-20 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-[#ffffff88] dark:bg-[#0000009e] backdrop-blur-md">
             <NavLink to={navItems[0].path} className="text-3xl font-bold font-mono">
-                EzStore
+                EzShop
             </NavLink>
 
             <div className="md:hidden">

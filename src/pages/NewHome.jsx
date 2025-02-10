@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
-import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 const FEATURED_PRODUCTS = [
   { id: 1, name: "Apple MacBook Air", price: "$1299.99", image: "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1737781969_3002786.jpg?format=webp&w=480&dpr=1.0" },
@@ -19,9 +19,9 @@ export default function NewHome() {
     <div className="dark:bg-gray-900 dark:text-white h-fit">
       {/* Hero Section */}
       <section className="text-center py-20 rounded bg-cover bg-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1607083205626-956228d6185d?q=80&w=1493&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}>
-        <h2 className="text-4xl font-bold mb-4">Discover the Best Deals at EzStore</h2>
-        <p className="text-lg">Shop the latest trends with amazing discounts</p>
-        <button className="mt-6 bg-white text-blue-500 dark:text-gray-900 px-6 py-2 rounded-lg font-semibold shadow-lg hover:scale-105 transition">Shop Now</button>
+        <h2 className="text-4xl font-bold mb-4">Discover the Best Deals at EzShop</h2>
+        <p className="text-lg pb-4">Shop the latest trends with amazing discounts</p>
+        <Link to="/products" className="mt-6 bg-white text-blue-500 dark:text-gray-900 px-6 py-2 rounded-lg font-semibold ">Shop Now</Link>
       </section>
 
       {/* Slider Section */}
@@ -92,7 +92,7 @@ export default function NewHome() {
         </div>
       </section>
       <footer className="text-center py-4 text-gray-500 dark:text-gray-400">
-        @EzShop Alrights Reserved! 2025
+        @EzShop All rights Reserved! 2025
       </footer>
     </div>
   );
