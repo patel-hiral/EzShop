@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 function CartItem({ item }) {
     const dispatch = useDispatch();
     return (
-        <div key={item.id} className="flex items-center justify-between py-2 w-full px-2">
+        <div key={item.id} className="flex items-center justify-between py-2 w-full md:px-2">
             <img src={item.thumbnail} alt={item.name} className="w-24 h-24" />
             <div className="flex-1 px-4">
                 <h1 className="text-lg">{item.title}</h1>
@@ -15,7 +15,7 @@ function CartItem({ item }) {
                 <Button onClick={() => { dispatch(removeFromCart(item.id)) }} className="my-2" variant="outline">REMOVE</Button>
             </div>
             <p className="text-sm font-semibold pr-4">${(item.price * item.quantity).toFixed(2)}</p>
-            <div className="cart-controller flex items-center gap-3">
+            <div className="cart-controller flex items-center gap-3 flex-col md:flex-row">
                 <button onClick={() => { dispatch(removeFromCart(item.id)) }} className="rounded-full p-1 shadow border border-secondary">
                     <MinusIcon className='h-5 w-5' />
                 </button>

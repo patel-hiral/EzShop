@@ -2,14 +2,12 @@ import React from "react";
 import CartItem from "@/components/CartItem";
 import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 function Cart() {
   const navigate = useNavigate();
 
   const cartItems = useSelector((state) => state.cart.items);
-
-  console.log(cartItems);
-
+  
   const discountedPrice = cartItems
     .reduce(
       (sum, item) =>
@@ -29,15 +27,26 @@ function Cart() {
     navigate("/react-store/checkout");
   }
 
+  if (cartItems.length === 0) {
+    return (
+      <div className="">
+        <p className="text-gray-300 text-center text-lg">No items in cart.</p>
+        <div className="w-fit mx-auto"><Button variant="link" className="text-center">
+          <NavLink to="/products">Continue Shopping</NavLink>
+        </Button></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex gap-20 p-4">
+    <div className="flex-col md:flex-row flex gap-20 p-4">
       <div className="flex-1 p-2 border border-secondary rounded shadow">
         {cartItems.map((item) => {
           return <CartItem item={item} key={item.id} />;
         })}
       </div>
 
-      <div className="w-96 ">
+      <div className="w-full md:w-96 ">
         <div className="p-4 border border-secondary rounded shadow">
           <h1 className="text-base font-bold pb-3 border-b border-secondary uppercase">
             Price Details

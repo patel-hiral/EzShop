@@ -1,19 +1,15 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import { cancelOrder } from "../store/orderSlice";
+import { useSelector } from "react-redux";
 
 function Orders() {
   const { orders } = useSelector((state) => state.order);
-  const dispatch = useDispatch();
-
-  const handleCancelOrder = (orderId) => {
-    dispatch(cancelOrder(orderId));
-  };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 min-h-fit grid grid-cols-2 gap-4">
+    <div className="max-w-5xl mx-auto p-4 min-h-fit grid grid-cols-1 md:grid-cols-2 gap-4">
       {orders.length === 0 ? (
-        <p className="text-gray-500 text-center text-lg col-span-2">No orders available.</p>
+        <p className="text-gray-500 text-center text-lg col-span-1 md:col-span-2">
+          No orders available.
+        </p>
       ) : (
         orders.map((order) => (
           <div
@@ -33,7 +29,7 @@ function Orders() {
                 ${order.totalPrice.toFixed(2)}
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2">
               {order.items.map((item) => (
                 <div key={item.id} className="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg shadow-sm">
                   <img
@@ -49,14 +45,6 @@ function Orders() {
                   </div>
                 </div>
               ))}
-            </div>
-            <div className="flex justify-end mt-3">
-              <button
-                // onClick={() => handleCancelOrder(order.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-lg shadow-md hover:bg-red-600 transition text-sm"
-              >
-                Cancel Order
-              </button>
             </div>
           </div>
         ))

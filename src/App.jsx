@@ -15,7 +15,6 @@ const ProtectedRoutes = lazy(() => import('../src/layout/ProtectedRoutes'))
 const Cart = lazy(() => import('../src/pages/Cart'))
 const CheckOut = lazy(() => import('../src/pages/CheckOut'))
 const Profile = lazy(() => import('../src/pages/Profile'))
-const Home = lazy(() => import('../src/pages/Home'))
 const About = lazy(() => import('../src/pages/About'))
 const Contact = lazy(() => import('../src/pages/Contact'))
 const FAQ = lazy(() => import('../src/pages/FAQ'))
@@ -23,12 +22,12 @@ const Login = lazy(() => import('../src/pages/Auth/Login'))
 const Register = lazy(() => import('../src/pages/Auth/Register'))
 const RootLayout = lazy(() => import('../src/layout/RootLayout'))
 
-const router = createBrowserRouter([  
+const router = createBrowserRouter([
   {
     path: '/', element: <RootLayout />, children: [
       { path: '', index: true, element: <NewHome /> },
       { path: 'about', element: <About /> },
-      { path: 'products', element: <Products />, loader: getAllProducts },
+      { path: 'products', element: <Products />, loader: getAllProducts, id: 'products' },
       { path: 'contact', element: <Contact /> },
       { path: 'faq', element: <FAQ /> },
       { path: 'auth/login', element: <Login /> },

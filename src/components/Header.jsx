@@ -4,7 +4,8 @@ import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
 import AuthProfile from "./AuthProfile";
 import { useSelector } from "react-redux";
-import { Menu, ShoppingBag, ShoppingBasketIcon, X } from "lucide-react";
+import { LogIn, Menu, ShoppingBag,  X } from "lucide-react";
+
 
 const navItems = [
     { id: "01", path: "/", title: "" },
@@ -21,8 +22,8 @@ function Header() {
 
     return (
         <header className="flex z-20 items-center justify-between py-3 px-6 md:px-20 border-b border-secondary border-1 fixed left-0 right-0 top-0 bg-[#ffffff88] dark:bg-[#0000009e] backdrop-blur-md">
-            <NavLink to={navItems[0].path} className="text-3xl font-medium font-mono">
-                <img src="/bug-store.png" alt="BugStore" className="h-7 sm:max-h-12 md:h-10" />
+            <NavLink to={navItems[0].path} className="text-3xl font-bold font-mono">
+                EzStore
             </NavLink>
 
             <div className="md:hidden">
@@ -31,7 +32,7 @@ function Header() {
                 </button>
             </div>
             <nav className={`absolute md:static top-16 bg-white dark:bg-black md:dark:bg-transparent left-0 w-full md:w-auto md:bg-transparent md:flex md:items-center md:gap-10 transition-transform ${menuOpen ? "block" : "hidden"}`}>
-                <ul className="flex flex-col md:flex-row items-center gap-5 p-5 md:p-0">
+                <ul className="flex flex-col font-semibold md:flex-row items-center gap-5 p-5 md:p-0">
                     {navItems.map((item) => (
                         <NavLink
                             to={item.path}
@@ -58,7 +59,7 @@ function Header() {
                         </p>
                     ) : (
                         <Button variant="secondary" onClick={() => setMenuOpen(false)}>
-                            <NavLink to="/auth/login">Login</NavLink>
+                            <LogIn/><NavLink to="/auth/login">Login</NavLink>
                         </Button>
                     )}
                     <ModeToggle />

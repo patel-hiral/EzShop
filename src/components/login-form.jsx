@@ -13,12 +13,15 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import { AuthContext } from "@/context/auth-context"
 import { Loader2 } from "lucide-react"
+
 export function LoginForm({
   className,
   ...props
 }) {
   const navigate = useNavigate();
+
   const { login, isLoading } = useContext(AuthContext)
+  
   const [username, setuserName] = useState('')
   const [password, setPassword] = useState('')
 

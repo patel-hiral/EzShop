@@ -1,7 +1,6 @@
-import CartItem from "@/components/CartItem";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCart } from "@/store/slices/cartSlice";
@@ -20,11 +19,7 @@ import {
 function CheckOut() {
     const [isOpen, setIsOpen] = React.useState(false);
     const cartItems = useSelector((state) => state.cart.items);
-
-    console.log(cartItems);
-
     const dispatch = useDispatch();
-
     const navigate = useNavigate();
     const { toast } = useToast();
 
@@ -35,7 +30,10 @@ function CheckOut() {
                 description: "Please Add Some Products to continue...",
             });
         }
-    }, [cartItems]);
+    }, [cartItems, toast]);
+
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
     function handleOrder() {
         const order = {
@@ -49,66 +47,64 @@ function CheckOut() {
                 image: item.thumbnail,
                 total: item.price * item.quantity,
             })),
-            totalPrice: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+            totalPrice,
         };
         dispatch(addOrder(order));
         toast({
             title: "Order Placed",
             description: "Your order has been placed successfully!",
         });
+        dispatch(clearCart());
         navigate("/react-store/orders");
         setIsOpen(false);
-        dispatch(clearCart());
     }
-    if(cartItems.length === 0) {
-        return <div className="flex h-screen justify-center pt-16">
-            <h1 className="text-2xl font-bold">
-                <p>
-                No Items in Cart
-                </p>
-                <Link to="/products"><Button variant="link">Continue Shopping</Button></Link>
-            </h1>
-        </div>
+
+    if (cartItems.length === 0) {
+        return (
+            <div className="flex h-screen justify-center pt-16">
+                <h1 className="text-2xl font-bold">
+                    <p>No Items in Cart</p>
+                    <Link to="/products">
+                        <Button variant="link">Continue Shopping</Button>
+                    </Link>
+                </h1>
+            </div>
+        );
     }
 
     return (
-        <div className="px-4">
-            {cartItems.map((item) => {
-                return <CartItem item={item} key={item.id} />;
-            })}
-            <div className="py-2 flex items-center justify-between">
-                <p>
-                    Total: $
-                    {cartItems
-                        .reduce((total, item) => total + item.price * item.quantity, 0)
-                        .toFixed(2)}
-                </p>
-                <Button
-                    onClick={() => {
-                        setIsOpen((prev) => !prev);
-                    }}
-                >
-                    Confirm Order
-                </Button>
+        <div className="px-4 max-w-lg mx-auto">
+        <h1 className="mb-4 text-2xl font-bold tracking text-center text-gray-900 dark:text-white">
+        Order Summary</h1>
+            <div className="border p-4 rounded-lg shadow-md">
+                {cartItems.map((item) => (
+                    <div key={item.id} className="flex items-center justify-between border-b pb-2 mb-2">
+                        <img src={item.thumbnail} alt={item.title} className="w-16 h-16 object-cover rounded" />
+                        <div className="flex-1 ml-4">
+                            <h2 className="text-lg font-semibold">{item.title}</h2>
+                            <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
+                        </div>
+                        <p className="text-lg font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                ))}
             </div>
-
+            <div className="mt-4 p-4 border rounded-lg shadow-md">
+                <p className="text-lg">Total Items: {totalItems}</p>
+                <p className="text-lg font-semibold">Total Price: ${totalPrice.toFixed(2)}</p>
+            </div>
+            <Button className="mt-4 w-full" onClick={() => setIsOpen(true)}>
+                Confirm Order
+            </Button>
             <AlertDialog open={isOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogTitle>Confirm Your Order</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This Confirm Order will place your
-                            order.
+                            Your total is ${totalPrice.toFixed(2)}. Proceed with the order?
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel
-                            onClick={() => {
-                                setIsOpen((prev) => !prev);
-                            }}
-                        >
-                            Cancel
-                        </AlertDialogCancel>
+                        <AlertDialogCancel onClick={() => setIsOpen(false)}>Cancel</AlertDialogCancel>
                         <AlertDialogAction onClick={handleOrder}>Confirm</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
