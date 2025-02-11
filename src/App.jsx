@@ -12,10 +12,14 @@ import ProductsByCategory, { getProductsBycategory, } from "./pages/products-by-
 import CategoryProductDetails, { getProductByCategory, } from "./pages/category-product-details";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./utils/constants";
+import AdminLayout from "./layout/admin-layout";
+import Dashboard from "./layout/dashboard";
+import AdminOrders from "./layout/admin-orders";
+import ManageProducts from "./layout/manage-products";
 
 const Products = lazy(() => import("./pages/products"));
 const ProductDetails = lazy(() => import("../src/pages/product-details"));
-const ProtectedRoutes = lazy(() => import("../src/layout/ProtectedRoutes"));
+const ProtectedRoutes = lazy(() => import("./layout/protected-routes"));
 const Cart = lazy(() => import("./pages/cart"));
 const CheckOut = lazy(() => import("./pages/check-out"));
 const Profile = lazy(() => import("./pages/profile"));
@@ -24,7 +28,7 @@ const Contact = lazy(() => import("./pages/contact"));
 const FAQ = lazy(() => import("./pages/faq"));
 const Login = lazy(() => import("./pages/auth/login"));
 const Register = lazy(() => import("./pages/auth/register"));
-const RootLayout = lazy(() => import("../src/layout/RootLayout"));
+const RootLayout = lazy(() => import("./layout/root-layout"));
 
 const router = createBrowserRouter([
   {
@@ -68,6 +72,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // Admin Routes
+  {
+    path: '/admin', element: <AdminLayout />,
+    children: [
+      { path: '', element: <Dashboard />, index: true },
+      { path: 'orders', element: <AdminOrders /> },
+      { path: 'products', element: <ManageProducts /> },
+    ]
+  }
 ]);
 
 function App() {

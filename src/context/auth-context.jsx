@@ -39,6 +39,15 @@ export default function AuthProvider({ children }) {
         }
     }
 
+    async function getAuthUser(id) {
+        const response = await fetch('https://dummyjson.com/users/' + id);
+        if (!response.ok) {
+            console.log('Failed To Get User Details');
+        }
+        const userData = await response.json();
+        return userData
+    }
+
     async function login({ username, password }, navigate) {
         try {
             setLoading(true);
@@ -55,10 +64,11 @@ export default function AuthProvider({ children }) {
 
             const resData = await response.json();
             const accessToken = resData.accessToken;
-
-            dispatch(loginAction(resData))
-
             localStorage.setItem("accessToken", accessToken);
+
+            const newUser = await getAuthUser(resData.id);
+
+            dispatch(loginAction(newUser))
 
             setLoading(false);
 

@@ -3,18 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { useSelector } from "react-redux";
 import { LogIn, Menu, ShoppingBag, X } from "lucide-react";
-
-
-const navItems = [
-    { id: "01", path: "/", title: "" },
-    { id: "02", path: "/products", title: "Products" },
-    { id: "03", path: "/about", title: "About" },
-    { id: "04", path: "/contact", title: "Contact" },
-    { id: "05", path: "/faq", title: "FAQ" },
-];
+import { navItems } from "@/utils/constants";
 
 function Header() {
     const { user } = useSelector((state) => state.user);

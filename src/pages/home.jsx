@@ -12,7 +12,7 @@ export default function NewHome() {
   console.log("Categories", categories);
 
   return (
-    <div className="dark:bg-gray-900 dark:text-white h-fit">
+    <div className="dark:bg-gray-900 dark:text-white h-fit px-4 sm:px-0">
       {/* Hero Section */}
       <section className="text-center py-20 rounded bg-cover bg-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1607083205626-956228d6185d?q=80&w=1493&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}>
         <h2 className="text-4xl font-bold mb-4">Discover the Best Deals at EzShop</h2>
@@ -42,6 +42,7 @@ export default function NewHome() {
             </SwiperSlide>
           ))}
         </Swiper>
+        
       </section>
 
       {/* Categories Section */}

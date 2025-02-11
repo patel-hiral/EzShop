@@ -1,9 +1,8 @@
 import Product from '@/components/product';
-import { setLoading, setResolved } from '@/store/slices/uiSlice';
-import React, { useEffect, useRef, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
 
 const fetchProducts = async ({ pageParam = 0 }) => {
   const response = await fetch(`https://dummyjson.com/products?limit=10&skip=${pageParam}`);
@@ -12,7 +11,6 @@ const fetchProducts = async ({ pageParam = 0 }) => {
 };
 
 function Products() {
-  const dispatch = useDispatch();
   const observer = useRef();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
@@ -23,13 +21,6 @@ function Products() {
       return lastPage.products.length > 0 ? loadedItems : undefined;
     },
   });
-
-  useEffect(() => {
-    dispatch(setLoading());
-    setTimeout(() => {
-      dispatch(setResolved());
-    }, 2000);
-  }, [data]);
 
   const lastElementRef = useCallback(
     (node) => {
@@ -56,7 +47,7 @@ function Products() {
           ))
         )}
       </ul>
-      {isFetchingNextPage && <div className='text-center'>Please Wait...</div>}
+      {isFetchingNextPage && <div className='w-fit mx-auto'><Loader2 className='animate-spin' /></div>}
     </>
   );
 }

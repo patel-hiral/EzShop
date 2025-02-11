@@ -23,7 +23,6 @@ export default ProductsByCategory
 
 export async function getProductsBycategory({ params }) {
     const category = params.category;
-
     const res = await fetch(`https://dummyjson.com/products/category/${category}`)
     if (!res.ok) {
         return console.log('Failed to get data');

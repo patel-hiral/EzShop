@@ -1,7 +1,8 @@
 import { QueryClient } from "@tanstack/react-query";
-export const queryClient = new QueryClient();
 
-export const FEATURED_PRODUCTS = [
+const queryClient = new QueryClient();
+
+const FEATURED_PRODUCTS = [
   {
     id: 1,
     name: "Apple MacBook Air",
@@ -37,3 +38,13 @@ export const FEATURED_PRODUCTS = [
     image: "https://redtape.com/cdn/shop/files/RSL0562_1.jpg?v=1738395669",
   },
 ];
+
+const navItems = [
+  { id: "01", path: "/", title: "" },
+  { id: "02", path: "/products", title: "Products" },
+  { id: "03", path: "/about", title: "About" },
+  { id: "04", path: "/contact", title: "Contact" },
+  { id: "05", path: "/faq", title: "FAQ" },
+];
+
+export { FEATURED_PRODUCTS, queryClient, navItems };
