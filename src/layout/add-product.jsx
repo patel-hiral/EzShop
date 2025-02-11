@@ -14,7 +14,6 @@ import React, { useState } from "react";
 
 function AddProduct({ onCancel }) {
     const { toast } = useToast()
-
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -63,9 +62,9 @@ function AddProduct({ onCancel }) {
     };
 
     return (
-        <div className="w-screen h-screen absolute inset-0 bg-transparent flex items-center justify-center backdrop-blur-sm">
-            <form onSubmit={handleSubmit}>
-                <Card className="w-96">
+        <div className="w-screen h-screen fixed inset-0 bg-transparent flex items-center justify-center backdrop-blur-xl">
+            <form onSubmit={handleSubmit} className="mx-auto">
+                <Card className="w-80 md:w-96">
                     <CardHeader>
                         <CardTitle>Add New Product</CardTitle>
                     </CardHeader>
@@ -80,7 +79,7 @@ function AddProduct({ onCancel }) {
                         <Input onChange={handleChange} type="number" required name="stock" placeholder="Enter Product Units" />
                     </CardContent>
                     <CardFooter className="flex items-center justify-between">
-                        <Button variant="outline" onClick={onCancel}>
+                        <Button variant="outline" type="button" onClick={onCancel}>
                             Cancel
                         </Button>
                         <Button type="submit" disabled={isPending}>{isPending ? 'Please Wait...' : 'Add Product'}</Button>

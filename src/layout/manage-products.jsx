@@ -8,7 +8,7 @@ import AddProduct from './add-product';
 function ManageProducts() {
     const { toast } = useToast();
 
-    const [isVisisble, setVisible] = useState(true)
+    const [isVisisble, setVisible] = useState(false)
 
     async function getProductsList() {
         const response = await fetch('https://dummyjson.com/products?limit=5');
