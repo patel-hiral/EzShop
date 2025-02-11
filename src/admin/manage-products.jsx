@@ -4,10 +4,10 @@ import { PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import AddProduct from './add-product';
+import AddProduct from '../layout/add-product';
 function ManageProducts() {
+    
     const { toast } = useToast();
-
     const [isVisisble, setVisible] = useState(false)
 
     async function getProductsList() {
@@ -16,6 +16,7 @@ function ManageProducts() {
             return console.log('Failed To Fetch Data...');
         }
         const resData = await response.json();
+        setItems(resData.products)
         return resData.products;
     }
 
@@ -24,7 +25,7 @@ function ManageProducts() {
         queryFn: getProductsList
     });
 
-    // Delete Product
+    const [items, setItems] = useState(data)
 
     async function deleteProduct(id) {
         try {
@@ -32,16 +33,18 @@ function ManageProducts() {
                 method: 'DELETE',
             })
             if (response.ok) {
-                toast({ title: 'Deleted', description: 'Product Successfully Deleted...' })
+                toast({ title: 'Deleted', description: 'Product Successfully Deleted...' });
             }
-            console.log(response);
+            setItems((prev) => prev.filter((item) => item.id !== id));
         } catch (error) {
             console.log('Error Deleting Product', error);
         }
     }
+
     function handleForm() {
         setVisible((prev) => !prev)
     }
+
     if (isLoading) {
         return <div className="text-center py-10 text-gray-600">Loading...</div>;
     }
@@ -64,16 +67,10 @@ function ManageProducts() {
                             <PlusCircle className="mr-2 h-5" />
                             Add New Product
                         </Button>
-                        <Button
-                            variant="secondary"
-                        >
-                            <PlusCircle className="mr-2 h-5" />
-                            Add Category
-                        </Button>
                     </div>
                     <CardContent>
                         <ul>
-                            {data.map((item) => {
+                            {items.map((item) => {
                                 return <li className='flex border-b border-secondary' key={item.id}>
                                     <div className='h-10 w-10 md:h-20 md:w-20'>
                                         <img className='h-full w-full object-cover' src={item.thumbnail} alt={item.title} />
@@ -89,6 +86,7 @@ function ManageProducts() {
                                     </div>
                                 </li>
                             })}
+                            {items.length === 0 && <div className='text-center'>No Products Available...</div>}
                         </ul>
                     </CardContent>
                 </CardHeader>

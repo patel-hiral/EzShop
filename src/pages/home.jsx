@@ -9,8 +9,6 @@ import { FEATURED_PRODUCTS } from "@/utils/constants";
 
 export default function NewHome() {
   const categories = useLoaderData();
-  console.log("Categories", categories);
-
   return (
     <div className="dark:bg-gray-900 dark:text-white h-fit px-4 sm:px-0">
       {/* Hero Section */}

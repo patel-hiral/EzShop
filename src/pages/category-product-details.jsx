@@ -116,8 +116,8 @@ function CategoryProductDetails() {
             Reviews
           </h1>
           <div className="review-container pl-2">
-            {product.reviews.map((review) => (
-              <div key={review.comment} className="review">
+            {product.reviews.map((review, index) => (
+              <div key={index} className="review">
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {review.comment}
                 </p>

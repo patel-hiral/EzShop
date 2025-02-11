@@ -36,7 +36,6 @@ function AdminLayout() {
         toast({ title: "Unauthorized", description: "Only Admin Can Access This Route" })
         return <Navigate to="/" />;
     }
-
     const [isSheetOpen, setIsSheetOpen] = useState(false);
 
     const location = useLocation();
@@ -71,19 +70,6 @@ function AdminLayout() {
                                 Dashboard
                             </NavLink>
                             <NavLink
-                                to="/admin/orders"
-                                className={({ isActive }) =>
-                                    `flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${isActive ? "bg-muted text-primary" : "text-muted-foreground"
-                                    }`
-                                }
-                            >
-                                <ShoppingCart className="h-4 w-4" />
-                                Orders
-                                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                                    6
-                                </Badge>
-                            </NavLink>
-                            <NavLink
                                 to="/admin/products"
                                 className={({ isActive }) =>
                                     `flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${isActive ? "bg-muted text-primary" : "text-muted-foreground"
@@ -91,11 +77,10 @@ function AdminLayout() {
                                 }
                             >
                                 <Package className="h-4 w-4" />
-                                Products
+                               Manage Products
                             </NavLink>
                         </nav>
                     </div>
-                    {/* Adding into bottom */}
                 </div>
             </div>
             <div className="flex flex-col">
@@ -133,21 +118,6 @@ function AdminLayout() {
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    to="/admin/orders"
-                                    className={({ isActive }) =>
-                                        `mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 transition-all hover:text-foreground ${isActive
-                                            ? "bg-muted text-foreground"
-                                            : "text-muted-foreground"
-                                        }`
-                                    }
-                                >
-                                    <ShoppingCart className="h-5 w-5" />
-                                    Orders
-                                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                                        6
-                                    </Badge>
-                                </NavLink>
-                                <NavLink
                                     to="/admin/products"
                                     className={({ isActive }) =>
                                         `mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 transition-all hover:text-foreground ${isActive
@@ -157,7 +127,7 @@ function AdminLayout() {
                                     }
                                 >
                                     <Package className="h-5 w-5" />
-                                    Products
+                                    Manage Products
                                 </NavLink>
                             </nav>
                         </SheetContent>

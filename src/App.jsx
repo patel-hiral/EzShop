@@ -13,9 +13,8 @@ import CategoryProductDetails, { getProductByCategory, } from "./pages/category-
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./utils/constants";
 import AdminLayout from "./layout/admin-layout";
-import Dashboard from "./layout/dashboard";
-import AdminOrders from "./layout/admin-orders";
-import ManageProducts from "./layout/manage-products";
+import Dashboard from "./admin/dashboard";
+import ManageProducts from "./admin/manage-products";
 
 const Products = lazy(() => import("./pages/products"));
 const ProductDetails = lazy(() => import("../src/pages/product-details"));
@@ -77,7 +76,6 @@ const router = createBrowserRouter([
     path: '/admin', element: <AdminLayout />,
     children: [
       { path: '', element: <Dashboard />, index: true },
-      { path: 'orders', element: <AdminOrders /> },
       { path: 'products', element: <ManageProducts /> },
     ]
   }
@@ -85,7 +83,6 @@ const router = createBrowserRouter([
 
 function App() {
   const isLoading = useSelector((state) => state.ui.isLoading);
-
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>

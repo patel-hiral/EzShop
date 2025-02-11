@@ -8,6 +8,7 @@ import { LogIn, Menu, ShoppingBag, X } from "lucide-react";
 import { navItems } from "@/utils/constants";
 
 function Header() {
+    
     const { user } = useSelector((state) => state.user);
     const cartItems = useSelector((state) => state.cart.items);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -40,7 +41,7 @@ function Header() {
                 </ul>
                 <div className="auth-section flex flex-col md:flex-row items-center gap-5 md:gap-8 p-5 md:p-0">
                     {user ? (
-                        <p className="flex items-center gap-5">
+                        <div className="flex items-center gap-5">
                             <Link to="/react-store/cart" className="relative" onClick={() => setMenuOpen(false)}
                             >
                                 <ShoppingBag className="w-5 h-5" />
@@ -48,6 +49,7 @@ function Header() {
                                     {cartItems.length}
                                 </div>
                             </Link>
+                            {user.role === 'admin' && <Link to="/admin" className="text-sm">Admin Dashboard</Link>}
                             <Link to="/react-store/profile" onClick={() => setMenuOpen(false)}
                             >
                                 <Avatar className="w-8 h-8">
@@ -55,7 +57,7 @@ function Header() {
                                     <AvatarFallback>CN</AvatarFallback>
                                 </Avatar>
                             </Link>
-                        </p>
+                        </div>
                     ) : (
                         <Button variant="secondary" onClick={() => setMenuOpen(false)}>
                             <LogIn /><NavLink to="/auth/login">Login</NavLink>

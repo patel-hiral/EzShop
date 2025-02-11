@@ -38,7 +38,7 @@ function Product({ product }) {
             ({product.reviews.length})
           </span>
         </p>
-        <p className="py-2 text-xs font-bold md:flex items-center">
+        <div className="py-2 text-xs font-bold md:flex items-center">
           <p>$ {product.price}&nbsp;&nbsp;</p>
           <span className="text-sm line-through font-medium text-gray-500">
             $
@@ -51,7 +51,7 @@ function Product({ product }) {
           <p className="text-xs text-green-600 font-semibold">
             {product.discountPercentage}% off
           </p>
-        </p>
+        </div>
         <p className="hidden md:block text-xs text-gray-400">
           {truncateText(product.description, 12)}
         </p>
