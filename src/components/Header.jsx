@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
-import AuthProfile from "./AuthProfile";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import { useSelector } from "react-redux";
-import { LogIn, Menu, ShoppingBag,  X } from "lucide-react";
+import { LogIn, Menu, ShoppingBag, X } from "lucide-react";
 
 
 const navItems = [
@@ -49,20 +50,28 @@ function Header() {
                 <div className="auth-section flex flex-col md:flex-row items-center gap-5 md:gap-8 p-5 md:p-0">
                     {user ? (
                         <p className="flex items-center gap-5">
-                            <Link to="/react-store/cart" className="relative">
+                            <Link to="/react-store/cart" className="relative" onClick={() => setMenuOpen(false)}
+                            >
                                 <ShoppingBag className="w-5 h-5" />
                                 <div className="absolute -top-2 -right-2 z-10 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                                     {cartItems.length}
                                 </div>
                             </Link>
-                            <AuthProfile image={user.image} />
+                            <Link to="/react-store/profile" onClick={() => setMenuOpen(false)}
+                            >
+                                <Avatar className="w-8 h-8">
+                                    <AvatarImage src={user.image} />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                            </Link>
                         </p>
                     ) : (
                         <Button variant="secondary" onClick={() => setMenuOpen(false)}>
-                            <LogIn/><NavLink to="/auth/login">Login</NavLink>
+                            <LogIn /><NavLink to="/auth/login">Login</NavLink>
                         </Button>
                     )}
-                    <ModeToggle />
+                    <ModeToggle onClose={() => setMenuOpen(false)}
+                    />
                 </div>
             </nav>
         </header>

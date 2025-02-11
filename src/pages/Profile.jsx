@@ -4,6 +4,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '@/store/slices/userSlice';
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 function Profile() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -23,6 +24,7 @@ function Profile() {
             {user.email}
           </h1>
         </CardHeader>
+        <CardContent><Link to="/react-store/orders" className='text-blue-600 hover:underline'>My Orders</Link></CardContent>
         <CardContent className="flex items-center justify-between">
           <Button variant="outline">Edit Profile</Button><Button onClick={() => dispatch(logoutAction())}>Log Out</Button>
         </CardContent>

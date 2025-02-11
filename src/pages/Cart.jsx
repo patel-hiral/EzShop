@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 function Cart() {
+  
   const navigate = useNavigate();
-
   const cartItems = useSelector((state) => state.cart.items);
   
   const discountedPrice = cartItems

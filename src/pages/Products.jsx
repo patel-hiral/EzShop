@@ -7,6 +7,7 @@ import { Link, useLoaderData } from 'react-router-dom'
 function Products() {
 
   const products = useLoaderData();
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLoading());

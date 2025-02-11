@@ -7,6 +7,7 @@ const loadUserFromStorage = () => {
 
 const userSlice = createSlice({
   name: "user",
+  
   initialState: {
     user: loadUserFromStorage(),
     isAuthenticated: !!loadUserFromStorage(),

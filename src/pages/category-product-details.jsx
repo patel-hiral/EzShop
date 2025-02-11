@@ -7,14 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/slices/cartSlice";
 import { useToast } from "@/hooks/use-toast";
 import { setLoading, setResolved } from "@/store/slices/uiSlice";
-function ProductDetails() {
+
+function CategoryProductDetails() {
 
   const redirect = useNavigate();
   const { user } = useSelector((state) => state.user);
   const { toast } = useToast();
   const dispatch = useDispatch();
 
-  const product = useLoaderData('single-product');
+  const product = useLoaderData();
 
   useEffect(() => {
     dispatch(setLoading());
@@ -132,9 +133,10 @@ function ProductDetails() {
   );
 }
 
-export default ProductDetails;
+export default CategoryProductDetails;
 
-export async function getProduct(id) {  
+export async function getProductByCategory({ params }) {
+  const id = params.id
   try {
     const response = await fetch("https://dummyjson.com/products/" + id);
     if (!response.ok) {
