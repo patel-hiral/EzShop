@@ -1,3 +1,6 @@
+import { QueryClient } from "@tanstack/react-query";
+export const queryClient = new QueryClient();
+
 export const FEATURED_PRODUCTS = [
   {
     id: 1,

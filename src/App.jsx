@@ -1,32 +1,29 @@
 import React, { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { getAllProducts } from "./pages/Products";
 import { getProduct } from "./pages/product-details";
 import { useSelector } from "react-redux";
 import { Toaster } from "./components/ui/toaster";
 import { ThemeProvider } from "./context/theme-context";
-import Loader from "./components/Loader";
-import NewHome, { getCategories } from "./pages/NewHome";
-import Orders from "./pages/Orders";
-import ProductsByCategory, {
-  getProductsBycategory,
-} from "./pages/ProductsByCategory";
-import CategoryProductDetails, {
-  getProductByCategory,
-} from "./pages/category-product-details";
+import Loader from "./components/loader";
+import NewHome, { getCategories } from "./pages/home";
+import Orders from "./pages/orders";
 
-const Products = lazy(() => import("../src/pages/Products"));
+import ProductsByCategory, { getProductsBycategory, } from "./pages/products-by-category";
+import CategoryProductDetails, { getProductByCategory, } from "./pages/category-product-details";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./utils/constants";
+
+const Products = lazy(() => import("./pages/products"));
 const ProductDetails = lazy(() => import("../src/pages/product-details"));
 const ProtectedRoutes = lazy(() => import("../src/layout/ProtectedRoutes"));
-const Cart = lazy(() => import("../src/pages/Cart"));
-const CheckOut = lazy(() => import("../src/pages/CheckOut"));
-const Profile = lazy(() => import("../src/pages/Profile"));
-const About = lazy(() => import("../src/pages/About"));
-const Contact = lazy(() => import("../src/pages/Contact"));
-const FAQ = lazy(() => import("../src/pages/FAQ"));
-const Login = lazy(() => import("./pages/auth/Login"));
-const Register = lazy(() => import("./pages/auth/Register"));
+const Cart = lazy(() => import("./pages/cart"));
+const CheckOut = lazy(() => import("./pages/check-out"));
+const Profile = lazy(() => import("./pages/profile"));
+const About = lazy(() => import("./pages/about"));
+const Contact = lazy(() => import("./pages/contact"));
+const FAQ = lazy(() => import("./pages/faq"));
+const Login = lazy(() => import("./pages/auth/login"));
+const Register = lazy(() => import("./pages/auth/register"));
 const RootLayout = lazy(() => import("../src/layout/RootLayout"));
 
 const router = createBrowserRouter([
@@ -37,11 +34,23 @@ const router = createBrowserRouter([
       { path: "", index: true, element: <NewHome />, loader: getCategories },
       { path: "about", element: <About /> },
 
-      { path: "products", element: <Products />, loader: getAllProducts, },
-      { path: "products/:id", element: <ProductDetails />, loader: ({ params }) => getProduct(params.id) },
+      { path: "products", element: <Products /> },
+      {
+        path: "products/:id",
+        element: <ProductDetails />,
+        loader: ({ params }) => getProduct(params.id),
+      },
 
-      { path: "category/:category", loader: getProductsBycategory, element: <ProductsByCategory /> },
-      { path: "cat/:id", element: <CategoryProductDetails />, loader: getProductByCategory },
+      {
+        path: "category/:category",
+        loader: getProductsBycategory,
+        element: <ProductsByCategory />,
+      },
+      {
+        path: "cat/:id",
+        element: <CategoryProductDetails />,
+        loader: getProductByCategory,
+      },
 
       { path: "contact", element: <Contact /> },
       { path: "faq", element: <FAQ /> },
@@ -66,7 +75,9 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
       <Toaster />
       <Loader isVisible={isLoading} />
     </ThemeProvider>
