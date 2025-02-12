@@ -40,7 +40,7 @@ export default function NewHome() {
             </SwiperSlide>
           ))}
         </Swiper>
-        
+
       </section>
 
       {/* Categories Section */}
@@ -48,8 +48,8 @@ export default function NewHome() {
         <h3 className="text-3xl font-bold mb-6">Shop By Categories</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-11/12 mx-auto">
           {categories.map((category) => (
-            <Link to={`category/${category.slug}`} key={category.name} className="p-6 bg-gray-200 dark:bg-gray-700 rounded-lg shadow-md cursor-pointer hover:scale-105 transition">
-              <p className="text-lg font-semibold">{category.name}</p>
+            <Link to={`category/${category.slug}`} key={category.name} className="py-6 bg-secondary rounded-lg shadow-md cursor-pointer hover:scale-105 transition">
+              <p className="text-sm md:text-base font-semibold">{category.name}</p>
             </Link>
           ))}
         </div>
