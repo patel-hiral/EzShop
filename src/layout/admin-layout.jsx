@@ -1,19 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useEffect } from "react";
-import { NavLink, Outlet, useLocation, Navigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, Navigate, Link, redirect } from "react-router-dom";
 import {
-    CircleUser,
     Home,
     Menu,
     Package,
     Package2,
     Search,
-    ShoppingCart,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -26,12 +23,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ModeToggle } from "../components/mode-toggle";
+import { logoutAction } from '@/store/slices/userSlice';
 
 function AdminLayout() {
-
+    const dispatch = useDispatch();
     const { toast } = useToast();
-
     const user = useSelector((state) => state.user.user);
+
     if (!user || user.role !== 'admin') {
         toast({ title: "Unauthorized", description: "Only Admin Can Access This Route" })
         return <Navigate to="/" />;
@@ -77,7 +75,7 @@ function AdminLayout() {
                                 }
                             >
                                 <Package className="h-4 w-4" />
-                               Manage Products
+                                Manage Products
                             </NavLink>
                         </nav>
                     </div>
@@ -148,22 +146,10 @@ function AdminLayout() {
                     )}
                     <div className="flex-1"></div>
                     <ModeToggle />
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="secondary" size="icon" className="rounded-full">
-                                <CircleUser className="h-5 w-5" />
-                                <span className="sr-only">Toggle user menu</span>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Settings</DropdownMenuItem>
-                            <DropdownMenuItem>Support</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <Link to="/react-store/profile" variant="secondary" size="icon" className="rounded-full h-8 w-8 overflow-hidden shadow-sm border border-secondary">
+                        <img src={user.image} className="h-full w-full object-contain" />
+                        <span className="sr-only">Toggle user menu</span>
+                    </Link>
                 </header>
                 <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-4 max-h-screen overflow-y-auto">
                     <Outlet />

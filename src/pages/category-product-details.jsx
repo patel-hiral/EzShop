@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import { ShoppingCart, StarIcon, Zap } from "lucide-react";
@@ -24,7 +24,7 @@ function CategoryProductDetails() {
         dispatch(setResolved());
       }, 500);
     }
-  }, [product]);
+  }, [product, dispatch]);
 
   function handleAddToCart() {
     if (!user) {

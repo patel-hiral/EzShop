@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import AddProduct from '../layout/add-product';
+import AddProduct from './handle-product';
 function ManageProducts() {
-    
+
     const { toast } = useToast();
     const [isVisisble, setVisible] = useState(false)
+    const [selectedProduct, setSelectedProduct] = useState(null)
+    const [items, setItems] = useState(null)
 
     async function getProductsList() {
         const response = await fetch('https://dummyjson.com/products?limit=5');
@@ -25,7 +27,13 @@ function ManageProducts() {
         queryFn: getProductsList
     });
 
-    const [items, setItems] = useState(data)
+    useEffect(() => {
+        if (data) {
+            setItems(data)
+        }
+    }, [data])
+
+    // const [items, setItems] = useState(data)
 
     async function deleteProduct(id) {
         try {
@@ -42,6 +50,7 @@ function ManageProducts() {
     }
 
     function handleForm() {
+        setSelectedProduct(null)
         setVisible((prev) => !prev)
     }
 
@@ -51,6 +60,11 @@ function ManageProducts() {
 
     if (isError) {
         return <div className="text-red-500 text-center">{error.message}</div>;
+    }
+
+    const handleEdit = (product) => {
+        setVisible(true)
+        setSelectedProduct(product)
     }
 
     return (
@@ -81,7 +95,7 @@ function ManageProducts() {
                                         <span className='text-sm'>$ {item.price}</span>
                                     </div>
                                     <div className="actions flex items-center gap-4">
-                                        <Button variant="outline">Edit</Button>
+                                        <Button variant="outline" onClick={() => handleEdit(item)}>Edit</Button>
                                         <Button onClick={() => deleteProduct(item.id)}>Delete</Button>
                                     </div>
                                 </li>
@@ -91,7 +105,7 @@ function ManageProducts() {
                     </CardContent>
                 </CardHeader>
             </Card>
-            {isVisisble && <AddProduct onCancel={handleForm} />}
+            {isVisisble && <AddProduct onCancel={handleForm} product={selectedProduct} />}
         </>
     );
 }

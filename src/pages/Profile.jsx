@@ -5,8 +5,11 @@ import { useDispatch } from 'react-redux';
 import { logoutAction } from '@/store/slices/userSlice';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { Badge } from '@/components/ui/badge';
+import { BadgeIcon } from 'lucide-react';
 function Profile() {
   const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.user);
 
   return (
@@ -23,6 +26,10 @@ function Profile() {
             <span className='font-semibold mr-4'>Email </span>
             {user.email}
           </h1>
+          {user.role === 'admin' && <h1 className='py-2 flex items-center text-sm justify-between'>
+            <span className='font-semibold mr-4'>Role </span>
+            <Badge>{user.role}</Badge>
+          </h1>}
         </CardHeader>
         <CardContent><Link to="/react-store/orders" className='text-blue-600 hover:underline'>My Orders</Link></CardContent>
         <CardContent className="flex items-center justify-between">

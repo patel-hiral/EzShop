@@ -10,10 +10,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
-function AddProduct({ onCancel }) {
-    const { toast } = useToast()
+function AddProduct({ onCancel, product }) {
+
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -21,18 +22,38 @@ function AddProduct({ onCancel }) {
         stock: ''
     })
 
+    useEffect(() => {
+        if (product) {
+            setFormData({
+                title: product.title,
+                price: product.price,
+                stock: product.stock,
+                category: product.category,
+            });
+        }
+    }, [product]);
+
+
+    const { toast } = useToast()
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
-        console.log(formData);
     };
 
-    async function handleAddProduct() {
-        const response = await fetch("https://dummyjson.com/products/add", {
-            method: "POST",
+    async function handleProduct() {
+        let url = 'https://dummyjson.com/products/add'
+        let method = 'POST'
+        if (product) {
+            url = 'https://dummyjson.com/products/' + product.id
+            method = 'PUT'
+        }
+
+        const response = await fetch(url, {
+            method: method,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
         });
@@ -41,14 +62,17 @@ function AddProduct({ onCancel }) {
         }
         const resData = await response.json();
         console.log(resData);
-
         return resData
     }
 
     const { mutate, isPending } = useMutation({
-        mutationFn: handleAddProduct,
+        mutationFn: handleProduct,
         onSuccess: () => {
-            toast({ title: "Product Added", description: "Product Successfully Added" });
+            if (!product) {
+                toast({ title: "Product Added", description: "Product Successfully Added" });
+            } else {
+                toast({ title: "Product Updated", description: "Product Successfully Updated" });
+            }
             onCancel();
         },
         onError: (error) => {
@@ -66,23 +90,23 @@ function AddProduct({ onCancel }) {
             <form onSubmit={handleSubmit} className="mx-auto">
                 <Card className="w-80 md:w-96">
                     <CardHeader>
-                        <CardTitle>Add New Product</CardTitle>
+                        <CardTitle>{product ? 'Update Product Details' : 'Add New Product'}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Label>Titile</Label>
-                        <Input onChange={handleChange} type="text" required name="title" placeholder="Enter Product Title" />
+                        <Input onChange={handleChange} type="text" value={formData.title} required name="title" placeholder="Enter Product Title" />
                         <Label>Category</Label>
-                        <Input onChange={handleChange} type="text" required name="category" placeholder="Enter Product Category" />
+                        <Input onChange={handleChange} type="text" value={formData.category} required name="category" placeholder="Enter Product Category" />
                         <Label>Price </Label>
-                        <Input onChange={handleChange} type="number" required name="price" placeholder="Enter Product Price" />
+                        <Input onChange={handleChange} type="number" value={formData.price} required name="price" placeholder="Enter Product Price" />
                         <Label>Stock </Label>
-                        <Input onChange={handleChange} type="number" required name="stock" placeholder="Enter Product Units" />
+                        <Input onChange={handleChange} type="number" value={formData.stock} required name="stock" placeholder="Enter Product Units" />
                     </CardContent>
                     <CardFooter className="flex items-center justify-between">
                         <Button variant="outline" type="button" onClick={onCancel}>
                             Cancel
                         </Button>
-                        <Button type="submit" disabled={isPending}>{isPending ? 'Please Wait...' : 'Add Product'}</Button>
+                        <Button type="submit" disabled={isPending} className="ml-2">{product ? 'Update' : 'Add' || product && isPending ? 'Upadting' : ''}</Button>
                     </CardFooter>
 
                 </Card>

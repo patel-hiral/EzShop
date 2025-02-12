@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { getProduct } from "./pages/product-details";
 import { useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import Orders from "./pages/orders";
 import ProductsByCategory, { getProductsBycategory, } from "./pages/products-by-category";
 import CategoryProductDetails, { getProductByCategory, } from "./pages/category-product-details";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./utils/constants";
+import { fetchProducts, queryClient } from "./utils/constants";
 import AdminLayout from "./layout/admin-layout";
 import Dashboard from "./admin/dashboard";
 import ManageProducts from "./admin/manage-products";
@@ -32,7 +32,7 @@ const RootLayout = lazy(() => import("./layout/root-layout"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <RootLayout />, loader: fetchProducts,
     children: [
       { path: "", index: true, element: <NewHome />, loader: getCategories },
       { path: "about", element: <About /> },

@@ -47,4 +47,13 @@ const navItems = [
   { id: "05", path: "/faq", title: "FAQ" },
 ];
 
-export { FEATURED_PRODUCTS, queryClient, navItems };
+const fetchProducts = async () => {
+  const response = await fetch("https://dummyjson.com/products");
+  if (!response.ok) {
+    return console.log("Failed To fetch data..");
+  }
+  const resData = response.json();
+  return resData.products;
+};
+
+export { FEATURED_PRODUCTS, queryClient, navItems, fetchProducts };
