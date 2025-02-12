@@ -1,7 +1,7 @@
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "@/context/theme-context"
 
-export function ModeToggle({onClose}) {
+export function ModeToggle({ onClose }) {
     const { theme, setTheme } = useTheme()
 
     const toggleTheme = () => {

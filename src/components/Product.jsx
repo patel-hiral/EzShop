@@ -30,7 +30,7 @@ function Product({ product }) {
         <p className="flex items-center">
           {" "}
           <span className="bg-green-500 py-[2px] text-white text-xs items-center px-1 rounded-sm flex w-fit font-semibold">
-            {(product.rating).toFixed(1)}
+            {product.rating.toFixed(1)}
             <StarIcon className="h-4" />
           </span>
           &nbsp;{" "}

@@ -1,4 +1,3 @@
-import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useEffect } from "react";
@@ -12,18 +11,9 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ModeToggle } from "../components/mode-toggle";
-import { logoutAction } from '@/store/slices/userSlice';
 
 function AdminLayout() {
     const dispatch = useDispatch();

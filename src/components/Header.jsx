@@ -12,12 +12,11 @@ function Header() {
     const { user } = useSelector((state) => state.user);
     const cartItems = useSelector((state) => state.cart.items);
     const products = useContext(ProductContext);
-
-    const navigate = useNavigate();
     const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const navigate = useNavigate();
 
     const handleSearchChange = (e) => {
         const query = e.target.value;
@@ -44,14 +43,14 @@ function Header() {
                 EzShop
             </NavLink>
 
-            {location.pathname !== "/cart" && ( // Hide search bar on cart page
+            {location.pathname !== "/cart" && ( // No Need Search On Cart
                 <div className="relative">
                     <input
                         type="text"
                         placeholder="Search products..."
                         value={searchTerm}
                         onChange={handleSearchChange}
-                        className="border p-2 rounded-md w-64"
+                        className="border p-2 rounded-md w-52 md:w-64"
                     />
                     {suggestions.length > 0 && (
                         <ul className="absolute left-0 w-full bg-white dark:bg-black border rounded-md mt-1 shadow-md z-50">
