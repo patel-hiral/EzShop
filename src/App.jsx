@@ -4,18 +4,20 @@ import { getProduct } from "./pages/product-details";
 import { useSelector } from "react-redux";
 import { Toaster } from "./components/ui/toaster";
 import { ThemeProvider } from "./context/theme-context";
-import Loader from "./components/loader";
-import NewHome, { getCategories } from "./pages/home";
-import Orders from "./pages/orders";
-
-import ProductsByCategory, { getProductsBycategory, } from "./pages/products-by-category";
-import CategoryProductDetails, { getProductByCategory, } from "./pages/category-product-details";
+import { getProductsBycategory } from "./pages/products-by-category";
+import { getProductByCategory } from "./pages/category-product-details";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { fetchProducts, queryClient } from "./utils/constants";
-import AdminLayout from "./layout/admin-layout";
-import Dashboard from "./admin/dashboard";
-import ManageProducts from "./admin/manage-products";
+import { getCategories } from "./pages/home";
+import Loader from "./components/loader";
 
+const CategoryProductDetails = lazy(() => import('./pages/category-product-details'))
+const ProductsByCategory = lazy(() => import("./pages/products-by-category"));
+const Orders = lazy(() => import("./pages/orders"));
+const NewHome = lazy(() => import("./pages/home"));
+const AdminLayout = lazy(() => import("./layout/admin-layout"));
+const Dashboard = lazy(() => import("./admin/dashboard"));
+const ManageProducts = lazy(() => import("./admin/manage-products"));
 const Products = lazy(() => import("./pages/products"));
 const ProductDetails = lazy(() => import("../src/pages/product-details"));
 const ProtectedRoutes = lazy(() => import("./layout/protected-routes"));
@@ -32,7 +34,8 @@ const RootLayout = lazy(() => import("./layout/root-layout"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />, loader: fetchProducts,
+    element: <RootLayout />,
+    loader: fetchProducts,
     children: [
       { path: "", index: true, element: <NewHome />, loader: getCategories },
       { path: "about", element: <About /> },
@@ -73,12 +76,13 @@ const router = createBrowserRouter([
   },
   // Admin Routes
   {
-    path: '/admin', element: <AdminLayout />,
+    path: "/admin",
+    element: <AdminLayout />,
     children: [
-      { path: '', element: <Dashboard />, index: true },
-      { path: 'products', element: <ManageProducts /> },
-    ]
-  }
+      { path: "", element: <Dashboard />, index: true },
+      { path: "products", element: <ManageProducts /> },
+    ],
+  },
 ]);
 
 function App() {
