@@ -48,11 +48,11 @@ const navItems = [
 ];
 
 const fetchProducts = async () => {
-  const response = await fetch("https://dummyjson.com/products");
+  const response = await fetch("https://dummyjson.com/products?limit=50");
   if (!response.ok) {
     return console.log("Failed To fetch data..");
   }
-  const resData = response.json();
+  const resData = await response.json();
   return resData.products;
 };
 

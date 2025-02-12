@@ -2,6 +2,7 @@ import { createContext, useCallback, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction, logoutAction } from "@/store/slices/userSlice";
+import { fetchProducts } from "@/utils/constants";
 
 export const AuthContext = createContext();
 
@@ -14,7 +15,6 @@ export default function AuthProvider({ children }) {
     const dispatch = useDispatch();
 
     const [isLoading, setLoading] = useState(false);
-
     const { toast } = useToast();
 
     async function register(formData, navigate) {
