@@ -106,7 +106,9 @@ function AddProduct({ onCancel, product }) {
                         <Button variant="outline" type="button" onClick={onCancel}>
                             Cancel
                         </Button>
-                        <Button type="submit" disabled={isPending} className="ml-2">{product ? 'Update' : 'Add' || product && isPending ? 'Upadting' : ''}</Button>
+                        <Button type="submit" disabled={isPending} className="ml-2">
+                            {isPending ? (product ? 'Saving...' : 'Updating...') : product ? 'Update' : 'Save'}
+                        </Button>
                     </CardFooter>
 
                 </Card>

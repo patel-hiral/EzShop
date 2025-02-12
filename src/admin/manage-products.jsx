@@ -10,7 +10,7 @@ function ManageProducts() {
     const { toast } = useToast();
     const [isVisisble, setVisible] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState(null)
-    const [items, setItems] = useState(null)
+    const [items, setItems] = useState([])
 
     async function getProductsList() {
         const response = await fetch('https://dummyjson.com/products?limit=5');
@@ -33,7 +33,6 @@ function ManageProducts() {
         }
     }, [data])
 
-    // const [items, setItems] = useState(data)
 
     async function deleteProduct(id) {
         try {

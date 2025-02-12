@@ -115,8 +115,8 @@ function ProductDetails() {
             Reviews
           </h1>
           <div className="review-container pl-2">
-            {product.reviews.map((review) => (
-              <div key={review.comment} className="review">
+            {product.reviews.map((review, index) => (
+              <div key={index} className="review">
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {review.comment}
                 </p>
@@ -134,7 +134,7 @@ function ProductDetails() {
 
 export default ProductDetails;
 
-export async function getProduct(id) {  
+export async function getProduct(id) {
   try {
     const response = await fetch("https://dummyjson.com/products/" + id);
     if (!response.ok) {
