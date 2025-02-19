@@ -1,19 +1,19 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { getProduct } from "./pages/ProductDetails";
 import { Toaster } from "./components/ui/toaster";
 import { ThemeProvider } from "./context/theme-context";
 import { getProductsBycategory } from "./pages/ProductsByCategory";
 import { getProductByCategory } from "./pages/CategoryProductDetails";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { fetchProducts, queryClient } from "./utils/constants";
-import { getCategories } from "./pages/Home";
+import { getCategories } from "./pages/NewHome";
 import Loader from "./components/loader";
 
 const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails'))
 const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory"));
 const Orders = lazy(() => import("./pages/Orders"));
-const NewHome = lazy(() => import("./pages/Home"));
+const NewHome = lazy(() => import("./pages/NewHome"));
 const AdminLayout = lazy(() => import("./layout/AdminLayout"));
 const Dashboard = lazy(() => import("./admin/Dashboard"));
 const ManageProducts = lazy(() => import("./admin/ManageProducts"));
