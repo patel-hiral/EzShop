@@ -8,7 +8,7 @@ import { getProductsBycategory } from "./pages/ProductsByCategory";
 import { getProductByCategory } from "./pages/CategoryProductDetails";
 import { fetchProducts, queryClient } from "./utils/constants";
 import { getCategories } from "./pages/NewHome";
-import Loader from "./components/loader";
+import Loader from "./components/Loader";
 
 const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails'))
 const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory"));
