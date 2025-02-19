@@ -4,7 +4,7 @@ import { PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import AddProduct from './handle-product';
+import AddProduct from './HandleProduct';
 function ManageProducts() {
 
     const { toast } = useToast();
