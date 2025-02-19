@@ -1,5 +1,5 @@
 import React from 'react'
-import Product from '@/components/product'
+import Product from '@/components/Product'
 import { useLoaderData } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 function ProductsByCategory() {

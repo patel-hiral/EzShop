@@ -1,4 +1,4 @@
-import Product from '@/components/product';
+import Product from '@/components/Product';
 import React, { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';

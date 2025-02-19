@@ -1,6 +1,4 @@
-import { LoginForm } from '@/components/login-form'
-import React from 'react'
-
+import { LoginForm } from '@/components/LoginForm'
 function Login() {
   return (
     <div className="flex min-h-svh rounded-lg flex-col items-center justify-center gap-6 bg-transparent p-6 md:p-10">
