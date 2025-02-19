@@ -6,7 +6,6 @@ import { logoutAction } from '@/store/slices/userSlice';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
-import { BadgeIcon } from 'lucide-react';
 function Profile() {
   const dispatch = useDispatch();
 

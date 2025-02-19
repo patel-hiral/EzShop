@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { LogIn, Menu, ShoppingBag, X } from "lucide-react";
 import { navItems } from "@/utils/constants";
 import { useContext } from "react";
-import { ProductContext } from "@/layout/root-layout";
+import { ProductContext } from "@/layout/RootLayout";
 function Header() {
     const { user } = useSelector((state) => state.user);
     const cartItems = useSelector((state) => state.cart.items);

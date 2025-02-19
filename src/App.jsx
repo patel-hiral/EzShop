@@ -1,35 +1,34 @@
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { getProduct } from "./pages/product-details";
-import { useSelector } from "react-redux";
+import { getProduct } from "./pages/ProductDetails";
 import { Toaster } from "./components/ui/toaster";
 import { ThemeProvider } from "./context/theme-context";
-import { getProductsBycategory } from "./pages/products-by-category";
-import { getProductByCategory } from "./pages/category-product-details";
+import { getProductsBycategory } from "./pages/ProductsByCategory";
+import { getProductByCategory } from "./pages/CategoryProductDetails";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { fetchProducts, queryClient } from "./utils/constants";
-import { getCategories } from "./pages/home";
-// import Loader from "./components/loader";
+import { getCategories } from "./pages/Home";
+import Loader from "./components/loader";
 
-const CategoryProductDetails = lazy(() => import('./pages/category-product-details'))
-const ProductsByCategory = lazy(() => import("./pages/products-by-category"));
-const Orders = lazy(() => import("./pages/orders"));
-const NewHome = lazy(() => import("./pages/home"));
-const AdminLayout = lazy(() => import("./layout/admin-layout"));
-const Dashboard = lazy(() => import("./admin/dashboard"));
-const ManageProducts = lazy(() => import("./admin/manage-products"));
-const Products = lazy(() => import("./pages/products"));
-const ProductDetails = lazy(() => import("../src/pages/product-details"));
-const ProtectedRoutes = lazy(() => import("./layout/protected-routes"));
-const Cart = lazy(() => import("./pages/cart"));
-const CheckOut = lazy(() => import("./pages/check-out"));
-const Profile = lazy(() => import("./pages/profile"));
-const About = lazy(() => import("./pages/about"));
-const Contact = lazy(() => import("./pages/contact"));
-const FAQ = lazy(() => import("./pages/faq"));
-const Login = lazy(() => import("./pages/auth/login"));
-const Register = lazy(() => import("./pages/auth/register"));
-const RootLayout = lazy(() => import("./layout/root-layout"));
+const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails'))
+const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory"));
+const Orders = lazy(() => import("./pages/Orders"));
+const NewHome = lazy(() => import("./pages/Home"));
+const AdminLayout = lazy(() => import("./layout/AdminLayout"));
+const Dashboard = lazy(() => import("./admin/Dashboard"));
+const ManageProducts = lazy(() => import("./admin/ManageProducts"));
+const Products = lazy(() => import("./pages/Products"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const ProtectedRoutes = lazy(() => import("./layout/ProtectedRoutes"));
+const Cart = lazy(() => import("./pages/Cart"));
+const CheckOut = lazy(() => import("./pages/CheckOut"));
+const Profile = lazy(() => import("./pages/Profile"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const FAQ = lazy(() => import("./pages/Faq"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const Register = lazy(() => import("./pages/auth/Register"));
+const RootLayout = lazy(() => import("./layout/RootLayout"));
 
 const router = createBrowserRouter([
   {
@@ -86,11 +85,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // const isLoading = useSelector((state) => state.ui.isLoading);
+  const isLoading = useSelector((state) => state.ui.isLoading);
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>
-        {/* <Loader isVisible={isLoading} /> */}
+        <Loader isVisible={isLoading} />
         <RouterProvider router={router} />
       </QueryClientProvider>
       <Toaster />
