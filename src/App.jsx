@@ -25,7 +25,7 @@ const CheckOut = lazy(() => import("./pages/CheckOut"));
 const Profile = lazy(() => import("./pages/Profile"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
-const FAQ = lazy(() => import("./pages/Faq"));
+const FAQ = lazy(() => import("./pages/FAQ"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const RootLayout = lazy(() => import("./layout/RootLayout"));
