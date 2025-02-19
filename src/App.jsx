@@ -9,7 +9,7 @@ import { getProductByCategory } from "./pages/category-product-details";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { fetchProducts, queryClient } from "./utils/constants";
 import { getCategories } from "./pages/home";
-import Loader from "./components/loader";
+// import Loader from "./components/loader";
 
 const CategoryProductDetails = lazy(() => import('./pages/category-product-details'))
 const ProductsByCategory = lazy(() => import("./pages/products-by-category"));
@@ -86,11 +86,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const isLoading = useSelector((state) => state.ui.isLoading);
+  // const isLoading = useSelector((state) => state.ui.isLoading);
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>
-        <Loader isVisible={isLoading} />
+        {/* <Loader isVisible={isLoading} /> */}
         <RouterProvider router={router} />
       </QueryClientProvider>
       <Toaster />
