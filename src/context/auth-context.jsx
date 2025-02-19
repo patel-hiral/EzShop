@@ -74,7 +74,6 @@ export default function AuthProvider({ children }) {
 
             toast({ title: "Login Success", description: `Welcome ${resData.firstName}` });
             navigate("/products");
-
         } catch (error) {
             setLoading(false);
             toast({ title: "Error", description: error.message || "Login Failed...", variant: "destructive" });
