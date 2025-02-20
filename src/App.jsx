@@ -91,9 +91,9 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
+        <Toaster />
         <Loader isVisible={isLoading} />
       </QueryClientProvider>
-      <Toaster />
     </ThemeProvider>
   );
 }
