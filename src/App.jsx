@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { getProduct } from "./pages/ProductDetails";
-import Toaster from "./components/ui/Toaster";
+import Toaster from "./components/ui/toaster";
 import { ThemeProvider } from "./context/ThemeContext";
 import { getProductsBycategory } from "./pages/ProductsByCategory";
 import { getProductByCategory } from "./pages/CategoryProductDetails";
