@@ -1,17 +1,17 @@
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/Button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/Card"
+import { Input } from "@/components/ui/Input"
+import { Label } from "@/components/ui/Label"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
-import { AuthContext } from "@/context/auth-context"
+import { AuthContext } from "@/context/AuthContext"
 import { Loader2 } from "lucide-react"
 
 export function LoginForm({
@@ -21,7 +21,7 @@ export function LoginForm({
   const navigate = useNavigate();
 
   const { login, isLoading } = useContext(AuthContext)
-  
+
   const [username, setuserName] = useState('')
   const [password, setPassword] = useState('')
 

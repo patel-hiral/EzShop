@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { useToast } from "@/hooks/use-toast";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "@/components/ui/AlertDialog";
 
 function CheckOut() {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -74,8 +74,8 @@ function CheckOut() {
 
     return (
         <div className="px-4 max-w-lg mx-auto">
-        <h1 className="mb-4 text-2xl font-bold tracking text-center text-gray-900 dark:text-white">
-        Order Summary</h1>
+            <h1 className="mb-4 text-2xl font-bold tracking text-center text-gray-900 dark:text-white">
+                Order Summary</h1>
             <div className="border p-4 rounded-lg shadow-md">
                 {cartItems.map((item) => (
                     <div key={item.id} className="flex items-center justify-between border-b pb-2 mb-2">

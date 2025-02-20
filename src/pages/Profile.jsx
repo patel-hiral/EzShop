@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Button } from '@/components/ui/Button';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '@/store/slices/userSlice';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/Badge';
 function Profile() {
   const dispatch = useDispatch();
 

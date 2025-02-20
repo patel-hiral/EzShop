@@ -2,7 +2,7 @@ import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeFromCart, addToCart } from "@/store/slices/cartSlice";
-import { Button } from "./ui/button";
+import { Button } from "./ui/Button";
 function CartItem({ item }) {
   const dispatch = useDispatch();
   return (

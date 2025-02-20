@@ -1,13 +1,13 @@
 import React from "react";
 import CartItem from "@/components/CartItem";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 function Cart() {
 
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
-  
+
   const discountedPrice = cartItems
     .reduce(
       (sum, item) =>

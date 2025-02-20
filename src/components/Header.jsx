@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { Button } from "./ui/button";
+import { Button } from "./ui/Button";
 import { ModeToggle } from "./ModeToggle";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { useSelector } from "react-redux";
 import { LogIn, Menu, ShoppingBag, X } from "lucide-react";
 import { navItems } from "@/utils/constants";

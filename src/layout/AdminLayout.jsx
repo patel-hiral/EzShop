@@ -10,9 +10,9 @@ import {
     Search,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
 import { ModeToggle } from "../components/ModeToggle";
 
 function AdminLayout() {
