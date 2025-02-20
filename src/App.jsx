@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import { useSelector } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { getProduct } from "./pages/ProductDetails";
@@ -89,8 +90,8 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>
-        <Loader isVisible={isLoading} />
         <RouterProvider router={router} />
+        <Loader isVisible={isLoading} />
       </QueryClientProvider>
       <Toaster />
     </ThemeProvider>
