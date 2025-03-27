@@ -8,10 +8,10 @@ import { store } from './store'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </Provider>
+      <Provider store={store}>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </Provider>
   </StrictMode>,
 )

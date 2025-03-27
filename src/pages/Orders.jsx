@@ -4,15 +4,14 @@ import { useSelector } from "react-redux";
 
 function Orders() {
   const { orders } = useSelector((state) => state.order);
-
   return (
     <div className="max-w-5xl mx-auto p-4 min-h-fit grid grid-cols-1 md:grid-cols-2 gap-4">
-      {orders.length === 0 ? (
+      {orders?.length === 0 ? (
         <p className="text-gray-500 text-center text-lg col-span-1 md:col-span-2">
           No orders available.
         </p>
       ) : (
-        orders.map((order) => (
+        orders?.map((order) => (
           <div
             key={order.id}
             className="border rounded-lg shadow-md p-4 bg-white"
@@ -27,7 +26,7 @@ function Orders() {
                 </p>
               </div>
               <p className="text-right font-bold text-green-600 text-lg">
-                ${order.totalPrice.toFixed(2)}
+                ${order.totalPrice}
               </p>
             </div>
             <div className="grid grid-cols-1 gap-2">

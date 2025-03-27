@@ -1,6 +1,13 @@
 import { QueryClient } from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: false, // Disable Suspense mode
+      refetchOnWindowFocus: false, // Optional: Prevent unnecessary refetching
+    },
+  },
+});
 
 const FEATURED_PRODUCTS = [
   {
