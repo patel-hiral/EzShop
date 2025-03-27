@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCart } from "@/store/slices/cartSlice";
 import { addOrder } from "@/store/slices/orderSlice";
+import { loadStripe } from "@stripe/stripe-js";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -24,7 +25,7 @@ function CheckOut() {
     const { toast } = useToast();
 
     useEffect(() => {
-        if (cartItems.length <= 0) {
+        if (cartItems?.length <= 0) {
             toast({
                 title: "No Products in cart",
                 description: "Please Add Some Products to continue...",
@@ -32,10 +33,17 @@ function CheckOut() {
         }
     }, [cartItems, toast]);
 
-    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cartItems?.reduce((sum, item) => sum + item?.price * item?.quantity, 0);
+    const totalItems = cartItems?.reduce((sum, item) => sum + item?.quantity, 0);
 
-    function handleOrder() {
+    async function handleOrder() {
+        const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+        if (!stripe) {
+            console.error("Stripe failed to load.");
+            return;
+        }
+
         const order = {
             id: new Date().getTime(),
             date: new Date().toISOString(),
@@ -49,14 +57,29 @@ function CheckOut() {
             })),
             totalPrice,
         };
-        dispatch(addOrder(order));
-        toast({
-            title: "Order Placed",
-            description: "Your order has been placed successfully!",
-        });
-        dispatch(clearCart());
-        navigate("/react-store/orders");
-        setIsOpen(false);
+
+        try {
+            const response = await fetch(`http://localhost:5000/create-checkout-session`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(order),
+            });
+            const session = await response.json();
+            dispatch(clearCart())
+            dispatch(addOrder(cartItems))
+            if (!session.id) {
+                throw new Error("Stripe session creation failed");
+            }
+            // Redirect to Stripe Checkout
+            const result = await stripe.redirectToCheckout({ sessionId: session.id });
+            if (result.error) {
+                console.error(result.error.message);
+            }
+        } catch (error) {
+            console.error("Error processing payment:", error);
+        }
     }
 
     if (cartItems.length === 0) {
@@ -93,7 +116,7 @@ function CheckOut() {
                 <p className="text-lg font-semibold">Total Price: ${totalPrice.toFixed(2)}</p>
             </div>
             <Button className="mt-4 w-full" onClick={() => setIsOpen(true)}>
-                Confirm Order
+                Pay Now
             </Button>
             <AlertDialog open={isOpen}>
                 <AlertDialogContent>

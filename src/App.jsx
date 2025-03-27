@@ -10,6 +10,9 @@ import { getProductByCategory } from "./pages/CategoryProductDetails";
 import { fetchProducts, queryClient } from "./utils/constants";
 import { getCategories } from "./pages/NewHome";
 import Loader from "./components/Loader";
+import CheckOutStripe from "./pages/CheckOutStripe";
+import PaymentSuccess from "./components/PaymentSuccess";
+import PaymentFailed from "./components/PaymentFailed";
 
 const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails'))
 const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory"));
@@ -39,6 +42,8 @@ const router = createBrowserRouter([
     children: [
       { path: "", index: true, element: <NewHome />, loader: getCategories },
       { path: "about", element: <About /> },
+      { path: "success", element: <PaymentSuccess /> },
+      { path: "failed", element: <PaymentFailed /> },
 
       { path: "products", element: <Products /> },
       {
@@ -70,6 +75,7 @@ const router = createBrowserRouter([
           { path: "cart", element: <Cart /> },
           { path: "checkout", element: <CheckOut /> },
           { path: "orders", element: <Orders /> },
+          { path: "stripe", element: <CheckOutStripe /> },
         ],
       },
     ],
