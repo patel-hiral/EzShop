@@ -9,7 +9,7 @@
   font-style: normal;
 }
 .justTesting{
-  
+  text-align: center;
 }
 @layer base {
   :root {
