@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -10,19 +10,17 @@ import { getProductByCategory } from "./pages/CategoryProductDetails";
 import { fetchProducts, queryClient } from "./utils/constants";
 import { getCategories } from "./pages/NewHome";
 import Loader from "./components/Loader";
-import CheckOutStripe from "./pages/CheckOutStripe";
-import PaymentSuccess from "./components/PaymentSuccess";
-import PaymentFailed from "./components/PaymentFailed";
 
-const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails'))
-const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory"));
-const Orders = lazy(() => import("./pages/Orders"));
-const NewHome = lazy(() => import("./pages/NewHome"));
+const RootLayout = lazy(() => import("./layout/RootLayout"));
 const AdminLayout = lazy(() => import("./layout/AdminLayout"));
-const Dashboard = lazy(() => import("./admin/Dashboard"));
-const ManageProducts = lazy(() => import("./admin/ManageProducts"));
+const NewHome = lazy(() => import("./pages/NewHome"));
 const Products = lazy(() => import("./pages/Products"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails'))
+const ManageProducts = lazy(() => import("./admin/ManageProducts"));
+const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory"));
+const Orders = lazy(() => import("./pages/Orders"));
+const Dashboard = lazy(() => import("./admin/Dashboard"));
 const ProtectedRoutes = lazy(() => import("./layout/ProtectedRoutes"));
 const Cart = lazy(() => import("./pages/Cart"));
 const CheckOut = lazy(() => import("./pages/CheckOut"));
@@ -32,13 +30,14 @@ const Contact = lazy(() => import("./pages/Contact"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
-const RootLayout = lazy(() => import("./layout/RootLayout"));
+const PaymentSuccess = lazy(() => import('./components/PaymentSuccess'))
+const PaymentFailed = lazy(() => import('./components/PaymentFailed'))
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    loader: fetchProducts,
+    loader: () => Promise.resolve(fetchProducts()),
     children: [
       { path: "", index: true, element: <NewHome />, loader: getCategories },
       { path: "about", element: <About /> },
@@ -75,7 +74,6 @@ const router = createBrowserRouter([
           { path: "cart", element: <Cart /> },
           { path: "checkout", element: <CheckOut /> },
           { path: "orders", element: <Orders /> },
-          { path: "stripe", element: <CheckOutStripe /> },
         ],
       },
     ],
@@ -96,7 +94,9 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <Suspense fallback={<Loader isVisible={isLoading} />}>
+          <RouterProvider router={router} />
+        </Suspense>
         <Toaster />
         <Loader isVisible={isLoading} />
       </QueryClientProvider>
