@@ -10,6 +10,8 @@ import { getProductByCategory } from "./pages/CategoryProductDetails";
 import { fetchProducts, queryClient } from "./utils/constants";
 import { getCategories } from "./pages/NewHome";
 import Loader from "./components/Loader";
+import Login from "./pages/Auth/Login";
+
 
 const RootLayout = lazy(() => import("./layout/RootLayout"));
 const AdminLayout = lazy(() => import("./layout/AdminLayout"));
@@ -28,7 +30,7 @@ const Profile = lazy(() => import("./pages/Profile"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const FAQ = lazy(() => import("./pages/FAQ"));
-const Login = lazy(() => import("./pages/auth/Login"));
+// const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const PaymentSuccess = lazy(() => import('./components/PaymentSuccess'))
 const PaymentFailed = lazy(() => import('./components/PaymentFailed'))
