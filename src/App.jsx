@@ -11,7 +11,7 @@ import { fetchProducts, queryClient } from "./utils/constants";
 import { getCategories } from "./pages/NewHome";
 import Loader from "./components/Loader";
 import Login from "./pages/Auth/Login";
-
+import Register from "./pages/Auth/Register"
 
 const RootLayout = lazy(() => import("./layout/RootLayout"));
 const AdminLayout = lazy(() => import("./layout/AdminLayout"));
@@ -31,7 +31,7 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 // const Login = lazy(() => import("./pages/auth/Login"));
-const Register = lazy(() => import("./pages/auth/Register"));
+// const Register = lazy(() => import("./pages/auth/Register"));
 const PaymentSuccess = lazy(() => import('./components/PaymentSuccess'))
 const PaymentFailed = lazy(() => import('./components/PaymentFailed'))
 
