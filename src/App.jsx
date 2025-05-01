@@ -90,6 +90,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  console.log("Hello World")
   const isLoading = useSelector((state) => state.ui.isLoading);
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
