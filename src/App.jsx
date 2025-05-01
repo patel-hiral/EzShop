@@ -28,8 +28,8 @@ const Profile = lazy(() => import("./pages/Profile.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
 const FAQ = lazy(() => import("./pages/FAQ.jsx"));
-const Login = lazy(() => import("./pages/auth/Login.jsx"));
-const Register = lazy(() => import("./pages/auth/Register.jsx"));
+const Login = lazy(() => import("./pages/Auth/Login.jsx"));
+const Register = lazy(() => import("./pages/Auth/Register.jsx"));
 const PaymentSuccess = lazy(() => import('./components/PaymentSuccess.jsx'))
 const PaymentFailed = lazy(() => import('./components/PaymentFailed.jsx'))
 
