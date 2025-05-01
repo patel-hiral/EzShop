@@ -10,30 +10,28 @@ import { getProductByCategory } from "./pages/CategoryProductDetails";
 import { fetchProducts, queryClient } from "./utils/constants";
 import { getCategories } from "./pages/NewHome";
 import Loader from "./components/Loader";
-import Login from "./pages/Auth/Login";
-import Register from "./pages/Auth/Register"
 
-const RootLayout = lazy(() => import("./layout/RootLayout"));
-const AdminLayout = lazy(() => import("./layout/AdminLayout"));
-const NewHome = lazy(() => import("./pages/NewHome"));
-const Products = lazy(() => import("./pages/Products"));
-const ProductDetails = lazy(() => import("./pages/ProductDetails"));
-const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails'))
-const ManageProducts = lazy(() => import("./admin/ManageProducts"));
-const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory"));
-const Orders = lazy(() => import("./pages/Orders"));
-const Dashboard = lazy(() => import("./admin/Dashboard"));
-const ProtectedRoutes = lazy(() => import("./layout/ProtectedRoutes"));
-const Cart = lazy(() => import("./pages/Cart"));
-const CheckOut = lazy(() => import("./pages/CheckOut"));
-const Profile = lazy(() => import("./pages/Profile"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-const FAQ = lazy(() => import("./pages/FAQ"));
-// const Login = lazy(() => import("./pages/auth/Login"));
-// const Register = lazy(() => import("./pages/auth/Register"));
-const PaymentSuccess = lazy(() => import('./components/PaymentSuccess'))
-const PaymentFailed = lazy(() => import('./components/PaymentFailed'))
+const RootLayout = lazy(() => import("./layout/RootLayout.jsx"));
+const AdminLayout = lazy(() => import("./layout/AdminLayout.jsx"));
+const NewHome = lazy(() => import("./pages/NewHome.jsx"));
+const Products = lazy(() => import("./pages/Products.jsx"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails.jsx"));
+const CategoryProductDetails = lazy(() => import('./pages/CategoryProductDetails.jsx'))
+const ManageProducts = lazy(() => import("./admin/ManageProducts.jsx"));
+const ProductsByCategory = lazy(() => import("./pages/ProductsByCategory.jsx"));
+const Orders = lazy(() => import("./pages/Orders.jsx"));
+const Dashboard = lazy(() => import("./admin/Dashboard.jsx"));
+const ProtectedRoutes = lazy(() => import("./layout/ProtectedRoutes.jsx"));
+const Cart = lazy(() => import("./pages/Cart.jsx"));
+const CheckOut = lazy(() => import("./pages/CheckOut.jsx"));
+const Profile = lazy(() => import("./pages/Profile.jsx"));
+const About = lazy(() => import("./pages/About.jsx"));
+const Contact = lazy(() => import("./pages/Contact.jsx"));
+const FAQ = lazy(() => import("./pages/FAQ.jsx"));
+const Login = lazy(() => import("./pages/auth/Login.jsx"));
+const Register = lazy(() => import("./pages/auth/Register.jsx"));
+const PaymentSuccess = lazy(() => import('./components/PaymentSuccess.jsx'))
+const PaymentFailed = lazy(() => import('./components/PaymentFailed.jsx'))
 
 const router = createBrowserRouter([
   {
