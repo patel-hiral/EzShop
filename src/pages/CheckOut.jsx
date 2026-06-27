@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";

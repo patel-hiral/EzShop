@@ -1,6 +1,6 @@
 import React from "react";
 import CartItem from "@/components/CartItem";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 function Cart() {
